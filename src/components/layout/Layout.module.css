@@ -1,0 +1,78 @@
+nav li{
+    font-family: "Poppins";
+}
+
+nav li > a{
+    color: #1E1B4B !important;
+    font-size: 17px !important;
+}
+
+.active{
+    color: #6C4DFF !important;
+    text-decoration: underline;
+    text-decoration-color: #FFC83D;
+    text-underline-offset: 8px;
+    text-decoration-thickness: 2px;
+}
+
+.btnConnexion{
+    border: 1px solid #6C4DFF;
+}
+
+.btnInscription{
+    background-color: #6C4DFF;
+    color: white;
+}
+
+.hero {
+    min-height: 70vh;
+    background: var(--color-bg-hero);
+    padding-top: 90px;
+    padding-bottom: 40px;
+}
+
+.title {
+    font-family: "Poppins Medium", sans-serif;
+    font-size: clamp(2.25rem, 1rem + 5vw, 4rem);
+    line-height: 1.05;
+    color: var(--color-primary-dark);
+}
+
+.titleAccent {
+    color: var(--color-primary);
+}
+
+.text {
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.375rem);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+}
+
+.heroVisual {
+    width: 50%;
+}
+
+.heroImg {
+    width: 100%;
+    max-width: 850px;
+}
+
+@media (max-width: 991px) {
+    .hero {
+        min-height: auto;
+        padding-top: 64px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 575px) {
+    .hero {
+        padding-top: 48px;
+    }
+}
+
+footer{
+    background-color: #1E1B4B;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}

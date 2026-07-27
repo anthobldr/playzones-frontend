@@ -1,0 +1,53 @@
+:root {
+  --color-primary: #6C4DFF;
+  --color-primary-dark: #1E1B4B;
+  --color-accent: #FFC72C;
+
+  --color-bg: #FEF7ED;
+  --color-bg-hero: #FFF9F1;
+  --color-topgames-bg: #feefd8;
+  --color-white: #fff;
+
+  --color-purple-bg: #F1ECFF;
+  --color-blue: #3B82F6;
+  --color-blue-bg: #E8F2FF;
+  --color-orange-bg: #FFF4E6;
+  --color-green: #22C55E;
+  --color-green-bg: #EAFBF1;
+
+  --color-text-muted: #555;
+  --color-text-secondary: #777;
+  --color-border: #E5E5E5;
+
+  --shadow-sm: 0 12px 28px rgba(1, 0, 0, 0.06);
+  --shadow-md: 0 15px 35px rgba(0, 0, 0, .08);
+  --shadow-lg: 0 18px 40px rgba(108, 77, 255, .25);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+}
+
+h2 {
+  color: var(--color-primary-dark);
+}
+
+@font-face {
+  font-family: "Poppins Medium";
+  src: url("./assets/font/Poppins/Poppins-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/font/Poppins/Poppins-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}

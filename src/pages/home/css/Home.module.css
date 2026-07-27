@@ -1,0 +1,59 @@
+
+.btnPlay {
+    background: var(--color-primary);
+    box-shadow: var(--shadow-lg);
+}
+
+.btnPlay:hover {
+    background: #5A3EF2;
+}
+
+.btnDiscover {
+    box-shadow: var(--shadow-md);
+}
+
+.statCard {
+    box-shadow: var(--shadow-sm);
+}
+
+.statIcon {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+}
+
+.statIconPurple {
+    background: var(--color-primary);
+}
+
+.statIconYellow {
+    background: var(--color-accent);
+}
+
+.statValue {
+    color: var(--color-primary-dark);
+    font-size: 1.25rem;
+}
+
+.heroVisual {
+    width: 50%;
+}
+
+.heroImg {
+    width: 100%;
+    max-width: 850px;
+}
+
+@media (max-width: 991px) {
+    .hero {
+        min-height: auto;
+        padding-top: 64px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 575px) {
+    .hero {
+        padding-top: 48px;
+    }
+}

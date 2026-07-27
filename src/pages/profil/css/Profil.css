@@ -1,0 +1,7 @@
+.menu-active{
+    background-color: var(--color-primary);
+}
+
+.menu-icon {
+    font-size: 20px;
+}

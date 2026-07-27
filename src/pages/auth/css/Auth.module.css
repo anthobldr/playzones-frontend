@@ -1,0 +1,27 @@
+label {
+    color: var(--color-primary-dark);
+}
+
+button{
+    background-color: var(--color-primary);
+}
+
+input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.passwordSecurityTrack {
+    width: 100%;
+    height: 6px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.passwordSecurityBar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
