@@ -1,12 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import "./global.css"
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import "./global.css"
-import Home from './App.tsx'
+import App from './App.tsx'
+import { AuthProvider } from './providers/AuthProvider.tsx';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <Home />
-  </StrictMode>,
-)
+
+    <StrictMode>
+        <AuthProvider>
+            <App />
+        </AuthProvider>
+    </StrictMode>
+);

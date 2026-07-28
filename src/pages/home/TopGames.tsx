@@ -1,3 +1,4 @@
+import CardGames from "../../components/layout/CardGames";
 import style from "./css/TopGames.module.css";
 import { games } from "../../data/games";
 
@@ -16,18 +17,8 @@ export default function TopGames() {
             </div>
 
             <div className="d-flex justify-content-center gap-4 gap-lg-5 flex-wrap">
-                {games.map((game) => (
-                <article key={game.name} className={style.cardGame}>
-                    <img src={game.img} alt={`Illustration du jeu ${game.name}`} />
-
-                    <div className={style.cardContent}>
-                        <h4>{game.name}</h4>
-
-                        <p>{game.desc}</p>
-
-                        <button className={style.playBtn}>Jouer</button>
-                    </div>
-                </article>
+                {games.map((game, index) => (
+                    <CardGames key={index} img={game.img} game={game.name} desc={game.desc}/>
                 ))}
             </div>
             <div className="text-center my-5">

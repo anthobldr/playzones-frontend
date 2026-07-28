@@ -9,70 +9,7 @@
     }
 }
 
-.cardGame {
-    width: 220px;
-    background: var(--color-white);
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: .3s;
-    cursor: pointer;
-}
-
-.cardGame img {
-    width: 100%;
-    height: 170px;
-    object-fit: cover;
-
-    background: var(--color-primary);
-}
-
-.cardContent {
-    padding: 22px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.cardContent h4 {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.cardContent p {
-    color: var(--color-text-secondary);
-    font-size: 14px;
-    min-height: 42px;
-    margin-bottom: 20px;
-}
-
-.playBtn {
-    width: 120px;
-    height: 42px;
-    border-radius: 50px;
-    border: 2px solid var(--color-primary);
-    background: var(--color-white);
-    color: var(--color-primary);
-    font-weight: 600;
-    transition: .25s;
-}
-
-.playBtn:hover {
-    background: var(--color-primary);
-    color: var(--color-white);
-}
-
 .btnAllGames {
     background-color: var(--color-accent);
     color: var(--color-primary-dark);
-}
-
-@media (max-width: 575px) {
-    .cardGame {
-        width: 100%;
-        max-width: 260px;
-    }
 }
