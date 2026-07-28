@@ -1,0 +1,58 @@
+.cardGame {
+    width: 180px;
+    background: var(--color-white);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: .3s;
+    cursor: pointer;
+}
+
+.cardGame img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+
+    background: var(--color-primary);
+}
+
+.cardContent {
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.cardContent h4 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.cardContent p {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    min-height: 42px;
+    margin-bottom: 20px;
+}
+
+.cardStatus {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+}
+
+.win{
+    background-color: green;
+}
+
+.loose{
+    background-color: firebrick;
+}
+
+@media (max-width: 575px) {
+    .cardGame {
+        width: 100%;
+        max-width: 260px;
+    }
+}

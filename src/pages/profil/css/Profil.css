@@ -1,7 +1,28 @@
+-- SideBar -- 
+
 .menu-active{
     background-color: var(--color-primary);
 }
 
 .menu-icon {
     font-size: 20px;
+}
+
+-- Composant TopBar -- 
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown-toggle i {
+    transition: transform .2s ease;
+}
+
+.dropdown.show .dropdown-toggle i {
+    transform: rotate(90deg);
+}
+
+.arrow-btn {
+    width: 32px;
+    height: 32px;
 }

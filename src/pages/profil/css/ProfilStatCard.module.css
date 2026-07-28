@@ -1,0 +1,26 @@
+.statIcon {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+}
+
+.statValue {
+    color: var(--color-primary-dark);
+    font-size: 1.25rem;
+}
+
+.gamesIcon {
+    background: var(--color-primary);
+}
+
+.trophyIcon {
+    background: var(--color-accent);
+}
+
+.scoreIcon {
+    background: var(--color-blue);
+}
+
+.badgeIcon {
+    background: rgb(244, 38, 38);
+}
