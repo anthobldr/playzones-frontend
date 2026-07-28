@@ -1,32 +1,26 @@
 import { useState } from "react"
-import"./css/Auth.module.css"
 import { useNavigate } from "react-router-dom";
+import { login } from "../../services/auth.services"
+import { useAuth } from "../../hooks/useAuth";
+
+import"./css/Auth.module.css" 
 
 export default function LoginForm(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("");
     const navigate = useNavigate()
+    const { setUser } = useAuth();
 
     async function handleLogin(){
-        setError("");
-
-        const res = await fetch("http://localhost:8001/api/auth/login", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({email, password}),
-        });
-
-        if(res.ok){
-            const data = await res.json();
-            localStorage.setItem("accessToken", data.accessToken);
-            localStorage.setItem("refreshToken", data.refreshToken);
-            localStorage.setItem("user", JSON.stringify(data.user));
-
+        try {
+            const data = await login(email, password);
+            setUser(data.user);
             navigate("/profil");
-        } else {
-            const data = await res.json();
-            setError(data.error || "Erreur lors de la connexion");
+        } catch(error){
+            if(error instanceof Error){
+                setError(error.message);
+            }
         }
     }
     
