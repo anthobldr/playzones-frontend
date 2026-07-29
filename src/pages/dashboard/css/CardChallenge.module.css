@@ -1,11 +1,11 @@
-.challengeProgressBar{
+.cardChallenge .challengeProgressBar{
     display: inline-block;
     width: 85%;
     height: 8px;
     background-color: #FFC72C;
 }
 
-.progressTrack {
+.cardChallenge .progressTrack {
     display: block;
     width: 85%;
     height: 8px;
@@ -13,7 +13,7 @@
     overflow: hidden;
 }
 
-.progressFill {
+.cardChallenge .progressFill {
     height: 100%;
     transition: width 0.3s ease;
 }

@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Home from "../pages/home/Home";
-import Profil from "../pages/profil/Profil";
+import Dashboard from "../pages/dashboard/Dashboard"
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 
@@ -14,9 +14,9 @@ export default function AppRouter() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
-        <Route path="/profil" element={
+        <Route path="/dashboard" element={
           <ProtectedRoute>
-            <Profil />
+            <Dashboard />
           </ProtectedRoute>
         } />
       </Routes>

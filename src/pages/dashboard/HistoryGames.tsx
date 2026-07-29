@@ -9,7 +9,7 @@ export default function HistoryGames(){
     ];
 
     return (
-        <div>
+        <div className="bg-white shadow-sm rounded-4 py-3 px-4">
             <h2>Historique de vos parties</h2>
             <div className="d-flex gap-4 gap-lg-4 flex-wrap my-3">
                 {history.map((card,index) => (

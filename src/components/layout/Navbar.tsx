@@ -16,7 +16,7 @@ export default function Navbar() {
                     <ul className={`d-flex navbar-nav mx-auto mb-2 mb-lg-0 gap-3 ${style.navList}`}>
                         {navLinks.map((link, index) => (
                             <li className="nav-item" key={link.label}>
-                                <Link className={`nav-link ${style.navLink} ${index === 0 ? style.active : ""}`} to={link.to}>
+                                <Link className={`nav-link ${index === 0 ? style.active : ""}`} to={link.to}>
                                     {link.label}
                                 </Link>
                             </li>

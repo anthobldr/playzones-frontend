@@ -1,0 +1,11 @@
+aside a{
+    color: #1E1B4B !important;
+}
+
+.menuActive{
+    background-color: var(--color-primary);
+}
+
+.menu-icon {
+    font-size: 20px;
+}
