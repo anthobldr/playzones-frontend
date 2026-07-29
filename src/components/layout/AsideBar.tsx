@@ -4,14 +4,14 @@ export default function AsideBar(){
     const location = useLocation();
     const pathname = location.pathname;
     const items = [
-        {icon: "bi bi-house", label: "Tableau de bord", to: "/dashboard"},
+        {icon: "bi bi-house", label: "Tableau de bord", to: "/account/dashboard"},
         {icon: "bi bi-controller", label: "Découvrir", to: "/decouvrir"},
         {icon: "bi bi-dice-3", label: "Mes jeux", to: "/mygames"},
         {icon: "bi bi-flag", label: "Défis", to: "/defis"},
         {icon: "bi bi-trophy", label: "Classements", to: "/scoreboard"},
         {icon: "bi bi-people", label: "Amis", to: "/friends"},
         {icon: "bi bi-chat-dots", label: "Messages", to: "/messages"},
-        {icon: "bi bi-person", label: "Profil", to: "/profile"},
+        {icon: "bi bi-person", label: "Profil", to: "/account/profil"},
         {icon: "bi bi-gear", label: "Paramètres", to: "/settings"},
     ]
     return (
