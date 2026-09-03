@@ -1,0 +1,15 @@
+.playBtn {
+    width: 120px;
+    height: 42px;
+    border-radius: 50px;
+    border: 2px solid var(--color-primary);
+    background: var(--color-white);
+    color: var(--color-primary);
+    font-weight: 600;
+    transition: .25s;
+}
+
+.playBtn:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
