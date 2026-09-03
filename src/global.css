@@ -34,8 +34,24 @@ body {
   background-color: var(--color-bg);
 }
 
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown-toggle i {
+    transition: transform .2s ease;
+}
+
+.dropdown.show .dropdown-toggle i {
+    transform: rotate(90deg);
+}
+
 h2 {
   color: var(--color-primary-dark);
+}
+
+.bg-primary{
+  background-color: var(--color-primary) !important;
 }
 
 @font-face {

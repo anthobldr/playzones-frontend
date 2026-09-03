@@ -71,6 +71,7 @@ export default function Profil(){
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }

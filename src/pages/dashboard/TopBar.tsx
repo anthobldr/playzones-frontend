@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import "./css/Profil.css";
+import { getAvatarUrl } from "../../services/avatar.service";
 
 const profilMenu = [
     { label: "Mon profil", icon: "bi-person", action: "profile" },
@@ -25,8 +27,8 @@ export default function TopBar() {
             </button>
             <div className="dropdown">
                 <button className="profile-btn btn rounded-pill d-flex align-items-center border-0 p-2 pe-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src={"/profil/m-avatar.svg"} alt={`Avatar de ${user?.username ?? "Invité"}`} className="rounded-circle" width="48" height="48"/>
-                    <div className="text-start ms-3">
+                    <img src={getAvatarUrl(user?.avatar)} alt={`Avatar de ${user?.username ?? "Invité"}`} className="rounded-circle" width="48" height="48"/>
+                    <div className="text-start ms-3 lh-1">
                         <div className="fw-semibold">{user?.username ?? "Invité"}</div>
                         <small className="text-muted">Joueur</small>
                     </div>
@@ -47,7 +49,7 @@ export default function TopBar() {
                     <li>
                         <button className="dropdown-item rounded-3 text-danger">
                             <i className="bi bi-box-arrow-right me-2"></i>
-                            Déconnexion
+                            <Link to={"/auth/logout"} className="text-decoration-none text-danger">Deconnexion</Link>
                         </button>
                     </li>
                 </ul>

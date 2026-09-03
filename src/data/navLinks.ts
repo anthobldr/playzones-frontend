@@ -5,7 +5,7 @@ export interface NavLink {
 
 export const navLinks: NavLink[] = [
     { label: "Accueil", to: "/" },
-    { label: "Jeux", to: "#" },
+    { label: "Jeux", to: "/jeux" },
     { label: "Classements", to: "#" },
     { label: "Défis", to: "#" },
     { label: "À propos", to: "#" },

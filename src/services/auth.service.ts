@@ -17,6 +17,13 @@ export async function login(email: string, password: string){
     return data;
 }
 
+export async function logout() {
+    await fetch(`${API_URL}/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+    });
+}
+
 export async function getCurrentUser(){
     const response = await fetch(`${API_URL}/auth/me`,{
         credentials: "include"

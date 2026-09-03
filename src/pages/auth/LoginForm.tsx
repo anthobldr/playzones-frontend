@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
-import { login } from "../../services/auth.services"
+import { login } from "../../services/auth.service"
 import { useAuth } from "../../hooks/useAuth";
 
 import"./css/Auth.module.css" 
@@ -16,7 +16,7 @@ export default function LoginForm(){
         try {
             const data = await login(email, password);
             setUser(data.user);
-            navigate("/profil");
+            navigate("/account/dashboard");
         } catch(error){
             if(error instanceof Error){
                 setError(error.message);
