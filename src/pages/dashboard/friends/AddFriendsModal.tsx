@@ -13,11 +13,19 @@ export default function AddFriendsModal({ onFriendAdded, friends }: AddFriendsMo
     const { user } = useAuth();
     const [searchPlayer, setSearchPlayer] = useState<string>("")
     const [suggestions, setSuggestions] = useState<Player[]>([])
+    const [sentRequests, setSentRequests] = useState<Set<number>>(new Set());
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
+    const [sendingId, setSendingId]= useState<number | null>(null);
     const handleSendRequest = async (playerId: number) => {
-        await friendshipService.sendFriendRequest(playerId);
-        onFriendAdded();
+        try{
+            setSendingId(playerId)
+            await friendshipService.sendFriendRequest(playerId);
+            setSentRequests((prev) => new Set(prev).add(playerId));
+            onFriendAdded();
+        } catch(error){
+            console.log(error);
+        }
     };
     useEffect(() => {
         const fetchSuggestions = async (): Promise<void> => {
@@ -98,9 +106,20 @@ export default function AddFriendsModal({ onFriendAdded, friends }: AddFriendsMo
                                                     )}
                                                 </div>
                                                 <div className="ms-auto">
-                                                    <button id={style.modalAddFriend} className="btn text-white border rounded-pill px-3" onClick={() => handleSendRequest(player.id)}>
-                                                        <i className="bi bi-plus-lg me-2"></i>Ajouter
-                                                    </button>
+                                                    {sentRequests.has(player.id) ? (
+                                                        <button id={style.modalAddFriend} className="btn text-success border rounded-pill px-3" disabled>
+                                                            <i className="bi bi-check-lg me-2"></i>Demande envoyée
+                                                        </button>
+                                                    ) : (
+                                                        <button id={style.modalAddFriend} className="btn text-white border rounded-pill px-3" onClick={() => handleSendRequest(player.id)} disabled={sendingId === player.id}>
+                                                            {sendingId === player.id ? (
+                                                                <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                                            ) : (
+                                                                <i className="bi bi-plus-lg me-2"></i>
+                                                            )}
+                                                            {sendingId === player.id ? "Envoi..." : "Ajouter"}
+                                                        </button>
+                                                    )}
                                                 </div>
                                             </li>
                                         ))
