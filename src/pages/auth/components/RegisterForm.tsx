@@ -1,6 +1,6 @@
 import { useState } from "react";
-import checkPassword, { passwordsMatch } from "../../utils/passwordValidator";
-import PasswordStrengthBar from "../../components/PasswordBar";
+import checkPassword, { passwordsMatch } from "../../../utils/passwordValidator";
+import PasswordStrengthBar from "../../../components/PasswordBar";
 
 type FieldStatus = "" | "is-valid" | "is-invalid";
 

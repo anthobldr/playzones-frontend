@@ -1,8 +1,8 @@
 import Footer from "../../components/layout/Footer"
 import Hero from "../../components/layout/Hero"
 import Navbar from "../../components/layout/Navbar"
-import CTABanner from "../home/CTABanner"
-import LoginForm from "./LoginForm"
+import CTABanner from "../home/components/CTABanner"
+import LoginForm from "./components/LoginForm"
 
 export default function Login(){
     return (

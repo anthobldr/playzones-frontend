@@ -1,7 +1,7 @@
 import Navbar from "../../components/layout/Navbar"
 import Hero from "../../components/layout/Hero"
-import RegisterForm from "./RegisterForm"
-import CTABanner from "../home/CTABanner"
+import RegisterForm from "./components/RegisterForm"
+import CTABanner from "../home/components/CTABanner"
 import Footer from "../../components/layout/Footer"
 export default function Register(){
     return (
