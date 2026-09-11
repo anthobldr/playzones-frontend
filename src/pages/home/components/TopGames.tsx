@@ -1,6 +1,6 @@
-import CardGames from "../../components/layout/CardGames";
-import style from "./css/TopGames.module.css";
-import { games } from "../../data/games";
+import CardGames from "../../../components/layout/CardGames";
+import style from "../css/TopGames.module.css";
+import { games } from "../../../data/games";
 
 export default function TopGames() {
     return (

@@ -1,4 +1,4 @@
-import style from "./css/Home.module.css";
+import style from "../css/Home.module.css";
 
 interface StatCardProps {icon: string; colorClass: string; label: string; value: string;}
 

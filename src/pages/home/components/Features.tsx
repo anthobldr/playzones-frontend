@@ -1,4 +1,4 @@
-import style from "./css/Features.module.css";
+import style from "../css/Features.module.css";
 
 export default function Features() {
     const features = [

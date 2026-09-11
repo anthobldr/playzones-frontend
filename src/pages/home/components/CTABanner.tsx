@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import style from "./css/CTABanner.module.css"
+import style from "../css/CTABanner.module.css"
 
 export default function CTABanner() {
     return (

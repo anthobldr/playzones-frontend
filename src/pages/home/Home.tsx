@@ -1,10 +1,10 @@
 import Footer from "../../components/layout/Footer"
 import Navbar from "../../components/layout/Navbar"
 import Hero from "../../components/layout/Hero"
-import StatCard from "./StatCard";
-import TopGames from "../../pages/home/TopGames"
-import Features from "../../pages/home/Features"
-import CTABanner from "../../pages/home/CTABanner"
+import StatCard from "./components/StatCard";
+import TopGames from "./components/TopGames"
+import Features from "./components/Features"
+import CTABanner from "./components/CTABanner"
 import style from "./css/Home.module.css";
 
 export default function Home() {
