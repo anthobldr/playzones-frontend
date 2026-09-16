@@ -1,11 +1,66 @@
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 import styles from "./css/EmailConfirmation.module.css";
-
+import { useEffect, useState } from "react";
+import { register } from "../../services/auth.service";
 const CODE_LENGTH = 6;
 
 export default function EmailConfirmation() {
-    const email = "dev.anthobldr@gmail.com";
+    const navigate = useNavigate();
+    const [error, setError] = useState("");
+    const [code, setCode] = useState("");
+    const email = localStorage.getItem("registerEmail") ?? "";
+    const username = localStorage.getItem("registerUsername") ?? "";
+    const password = localStorage.getItem("registerPassword") ?? "";
+
+    useEffect(() => {
+        const storedEmail = localStorage.getItem("registerEmail");
+        
+        if(!storedEmail){
+            navigate("/auth/register");
+        }
+    }, [navigate]);
+
+    function handleCodeInput(index: number, value: string) {
+        if (value.length > 1) value = value[0];
+        
+        const codeArray = code.padEnd(CODE_LENGTH, ' ').split('');
+        codeArray[index] = value;
+        setCode(codeArray.join('').trim());
+        
+        // Focus sur l'input suivant (optionnel)
+        if (value && index < CODE_LENGTH - 1) {
+            // document.querySelector(`input[aria-label="Chiffre ${index + 2}"]`)?.focus();
+        }
+    }
+
+    async function handleVerifyCode(){
+        setError("");
+
+        if(!code){
+            setError("Veuillez entrer le code");
+            return
+        }
+
+        try{
+            const data = await register(email, code, username, password);
+
+            localStorage.setItem("accessToken", data.accessToken);
+            localStorage.setItem("refreshToken", data.refreshToken);
+            localStorage.setItem("user", JSON.stringify(data.user));
+
+            localStorage.removeItem("registerEmail");
+            localStorage.removeItem("registerUsername");
+            localStorage.removeItem("registerPassword");
+
+            navigate("/account/dashboard");
+        } catch(error){
+            if(error instanceof Error){
+                setError(error.message);
+            }
+        }
+    }
 
     return (
         <>
@@ -25,9 +80,9 @@ export default function EmailConfirmation() {
                         </div>
                         <button type="button" className={`${styles.editEmail} ms-auto`}>Modifier<i className="ms-2 bi bi-pencil-fill"></i></button>
                     </div>
-                    <form className="col-lg-9 mx-auto">
+                    <form className="col-lg-9 mx-auto" onSubmit={(e) => {e.preventDefault(); handleVerifyCode();}}>
                         <div className="d-flex gap-2 justify-content-center">
-                            {Array.from({ length: CODE_LENGTH }, (_, index) => <input key={index} type="text" maxLength={1} inputMode="numeric" aria-label={`Chiffre ${index + 1}`} className={styles.codeInput} />)}
+                            {Array.from({ length: CODE_LENGTH }, (_, index) => <input key={index} type="text" maxLength={1} inputMode="numeric" aria-label={`Chiffre ${index + 1}`} className={styles.codeInput} value={code[index] || ""} onChange={(e) => handleCodeInput(index, e.target.value)}/>)}
                         </div>
                         <div className="d-flex flex-column gap-2 mt-lg-4">
                             <button type="submit" className="btn bg-primary text-white rounded-pill py-lg-2"><i className="bi bi-envelope-check-fill me-2" />Valider mon adresse e-mail</button>

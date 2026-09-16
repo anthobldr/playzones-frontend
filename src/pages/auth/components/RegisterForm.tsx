@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { verifyEmail } from "../../../services/auth.service";
 import checkPassword, { passwordsMatch } from "../../../utils/passwordValidator";
 import PasswordStrengthBar from "../../../components/PasswordBar";
 
 type FieldStatus = "" | "is-valid" | "is-invalid";
 
 export default function RegisterForm() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -33,7 +36,7 @@ export default function RegisterForm() {
         setConfirmPassword(value);
         setConfirmStatus(passwordsMatch(password, value) ? "is-valid" : "is-invalid");
     }
-    // Fonction d'envoie de requête vers l'API Symfony
+    
     async function handleRegister() {
         setError("");
 
@@ -43,20 +46,18 @@ export default function RegisterForm() {
             return;
         }
 
-        const res = await fetch("http://localhost:8000/auth/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, username, password, confirmPassword: confirmPassword }),
-        });
+        try{
+            await verifyEmail(email, username, password, confirmPassword);
 
-        const data = await res.json();
+            localStorage.setItem("registerEmail", email);
+            localStorage.setItem("registerUsername", username);
+            localStorage.setItem("registerPassword", password);
 
-        if (res.ok) {
-            localStorage.setItem("accessToken", data.accessToken);
-            localStorage.setItem("refreshToken", data.refreshToken);
-            localStorage.setItem("user", JSON.stringify(data.user));
-        } else {
-            setError(data.error || "Erreur lors de l'inscription");
+            navigate("/auth/confirmation?email=" +email);
+        } catch(error){
+            if(error instanceof Error){
+                setError(error.message);
+            }
         }
     }
 
