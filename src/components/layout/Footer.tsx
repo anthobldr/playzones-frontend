@@ -1,4 +1,4 @@
-import style from "./Layout.module.css";
+import style from "./css/Footer.module.css";
 import { navLinks } from "../../data/navLinks";
 
 const legalLinks = [
