@@ -1,8 +1,6 @@
 .hero {
-    min-height: 70vh;
+    min-height: auto;
     background: var(--color-bg-hero);
-    padding-top: 90px;
-    padding-bottom: 40px;
 }
 
 .heroContent {
@@ -20,32 +18,23 @@
     line-height: 1.7;
 }
 
-.heroImg { 
-    max-width: 1150px; 
+.heroVisual { 
+    top: 20px !important; 
+    right: -90px !important; 
+}
+
+.heroImg {
+    max-width: 500px;
     transform-origin: right center;
 }
 
-@media(max-width: 576px){
-    .heroVisual {
-        top: 20px !important;
-        right: -90px !important;
-    }
-    .heroImg{
-        max-width: 500px; 
-        transform-origin: right center;
-    }
-}
-
-@media (max-width: 991px) {
+@media (min-width: 992px) {
     .hero {
-        min-height: auto;
-        padding-top: 64px;
-        text-align: center;
+        min-height: 70vh;
+        padding-top: 90px;
     }
-}
 
-@media (max-width: 575px) {
-    .hero {
-        padding-top: 48px;
+    .heroImg {
+        max-width: 1150px;
     }
 }

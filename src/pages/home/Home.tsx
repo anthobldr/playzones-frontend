@@ -41,6 +41,7 @@ export default function Home() {
                         <StatCard icon="bi bi-trophy-fill" colorClass={style.statIconYellow} label="Parties jouées" value="15 892" />
                     </div>
                 </Hero>
+                <TopGames />
             </main>
         </>
     )

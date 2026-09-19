@@ -8,12 +8,9 @@ nav li > a{
 }
 
 .active{
-    color: var(--color-primary) !important;
-    text-decoration: underline;
-    text-decoration-color: #FFC83D;
-    text-underline-offset: 8px;
-    text-decoration-thickness: 2px;
-}
+        background-color: var(--color-primary);
+        color: var(--color-white) !important;
+    }
 
 .menuBurger {
     width: 44px;
@@ -35,11 +32,10 @@ nav li > a{
     background: var(--color-bg);
     z-index: 1000;
 }
-
 .navbarAvatar{
-        width: 48px !important;
-        height: 48px !important;
-    }
+    width: 44px !important;
+    height: 44px !important;
+}
 
 .btnConnexion{
     border: 1px solid var(--color-primary);
@@ -50,14 +46,18 @@ nav li > a{
     color: var(--color-white);
 }
 
-@media(max-width: 576px){
+@media(min-width: 992px){
     .active{
-        background-color: var(--color-primary);
-        color: var(--color-white) !important;
+        background-color: var(--color-bg);
+        color: var(--color-primary) !important;
+        text-decoration: underline;
+        text-decoration-color: #FFC83D;
+        text-underline-offset: 8px;
+        text-decoration-thickness: 2px;
     }
 
     .navbarAvatar{
-        width: 44px !important;
-        height: 44px !important;
+        width: 48px !important;
+        height: 48px !important;
     }
 }
