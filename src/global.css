@@ -1,10 +1,10 @@
 :root {
   --color-primary: #6C4DFF;
   --color-primary-dark: #1E1B4B;
+  --color-orange: #FFC72C;
 
   --color-bg: #FEF7ED;
   --color-bg-hero: #FFF9F1;
-  --color-topgames-bg: #feefd8;
   --color-white: #fff;
 
   --color-purple-bg: #F1ECFF;
@@ -54,6 +54,10 @@ h2 {
 
 .bg-primary{
   background-color: var(--color-primary) !important;
+}
+
+.bg-body{
+  background-color: #feefd8 !important;
 }
 
 @font-face {

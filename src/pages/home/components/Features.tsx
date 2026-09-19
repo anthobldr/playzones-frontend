@@ -29,8 +29,8 @@ export default function Features() {
     ];
 
     return (
-        <div className="container bg-body rounded-4 mt-4 mb-5 py-4">
-            <div className="row g-4">
+        <section className={`container-fluid bg-body py-5`}>
+            <div className="bg-white row g-4 rounded-5 py-4 mx-lg-5">
                 {features.map((card, index) => (
                     <div key={card.titre} className={`col-6 col-lg-3 d-flex flex-column align-items-center text-center px-3 ${index !== features.length - 1 ? style.borderItem : ""}`}>
                         <div className={`${style.featureIcon} ${card.bg} rounded-circle d-flex justify-content-center align-items-center`}>
@@ -41,6 +41,6 @@ export default function Features() {
                     </div>
                 ))}
             </div>
-        </div>
+        </section>
     );
 }

@@ -27,7 +27,7 @@
 }
 
 .statIconYellow {
-    background: var(--color-accent);
+    background: var(--color-orange);
 }
 
 .statValue {

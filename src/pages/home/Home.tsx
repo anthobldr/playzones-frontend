@@ -42,6 +42,9 @@ export default function Home() {
                     </div>
                 </Hero>
                 <TopGames />
+                <Features />
+                <CTABanner />
+                <Footer />
             </main>
         </>
     )

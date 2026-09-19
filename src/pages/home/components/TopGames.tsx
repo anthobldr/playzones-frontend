@@ -4,7 +4,7 @@ import { games } from "../../../data/games";
 
 export default function TopGames() {
     return (
-        <section className={`container-fluid ${style.topGames} pb-5`}>
+        <section className={`container-fluid ${style.topGames} bg-body mt-5 mt-lg-0 pb-5`}>
             <div className="text-center pt-5 lh-1">
                 <h2>
                     <i className="bi bi-controller me-2" aria-hidden="true"></i>

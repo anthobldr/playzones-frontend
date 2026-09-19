@@ -17,7 +17,7 @@ const socialLinks = [
 export default function Footer() {
     return (
         <footer className={style.footer}>
-            <div className="row py-5 px-4 px-lg-5 text-center text-lg-start">
+            <div className="row py-5 px-4 px-lg-5">
                 <div className="col-12 col-lg-3 mb-4 mb-lg-0">
                     <h2 className="text-white">Play<span className="text-warning">Zone</span></h2>
                     <p className="text-white">
@@ -26,8 +26,8 @@ export default function Footer() {
                     </p>
                 </div>
                 <div className="col-6 col-lg-3 mb-4 mb-lg-0">
-                    <h5 className="text-white">Navigation</h5>
-                    <ul className="list-unstyled d-flex flex-column gap-2">
+                    <h5 className="text-white text-center">Navigation</h5>
+                    <ul className="list-unstyled d-flex flex-column gap-2 text-center">
                         {navLinks.map((link) => (
                             <li key={link.label}>
                                 <a href={link.href} className="text-white text-decoration-none">
@@ -38,8 +38,8 @@ export default function Footer() {
                     </ul>
                 </div>
                 <div className="col-6 col-lg-3 mb-4 mb-lg-0">
-                    <h5 className="text-white">Légal</h5>
-                    <ul className="list-unstyled d-flex flex-column gap-2">
+                    <h5 className="text-white text-center">Légal</h5>
+                    <ul className="list-unstyled d-flex flex-column gap-2 text-center">
                         {legalLinks.map((label) => (
                             <li key={label}>
                                 <a href="#" className="text-white text-decoration-none">{label}</a>
@@ -47,8 +47,9 @@ export default function Footer() {
                         ))}
                     </ul>
                 </div>
+                <hr className="d-lg-none text-warning"/>
                 <div className="col-12 col-lg-3">
-                    <h5 className="text-white">Suivez-nous</h5>
+                    <h5 className="text-white text-center text-lg-start">Suivez-nous</h5>
                     <div className="d-flex justify-content-center justify-content-lg-start gap-4 my-3">
                         {socialLinks.map((social) => (
                             <a key={social.icon} href={social.href} aria-label={social.label} className="text-white">

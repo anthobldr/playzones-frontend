@@ -17,25 +17,40 @@
 }
 
 .imageContainer img {
-    width: 75%;
+    width: 50%;
     position: absolute;
     z-index: 10;
 }
 
 .characterImage {
-    top: -75px;
-    left: 0;
+    top: -65px;
+    left: -50px;
 }
 
 .desImage {
-    top: -65px;
-    right: 0;
+    top: -60px;
+    right: -60px;
 }
 
-@media (max-width: 767px) {
+@media (min-width: 992px) {
+
+    .imageContainer {
+        position: relative;
+    }
+
     .imageContainer img {
-        position: static;
-        width: 55%;
-        margin: 0 auto;
+        width: 75%;
+        position: absolute;
+        z-index: 10;
+    }
+
+    .characterImage {
+        top: -75px;
+        left: 0;
+    }
+
+    .desImage {
+        top: -65px;
+        right: 0;
     }
 }
