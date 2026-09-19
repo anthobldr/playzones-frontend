@@ -1,7 +1,6 @@
 :root {
   --color-primary: #6C4DFF;
   --color-primary-dark: #1E1B4B;
-  --color-accent: #FFC72C;
 
   --color-bg: #FEF7ED;
   --color-bg-hero: #FFF9F1;
@@ -18,10 +17,6 @@
   --color-text-muted: #555;
   --color-text-secondary: #777;
   --color-border: #E5E5E5;
-
-  --shadow-sm: 0 12px 28px rgba(1, 0, 0, 0.06);
-  --shadow-md: 0 15px 35px rgba(0, 0, 0, .08);
-  --shadow-lg: 0 18px 40px rgba(108, 77, 255, .25);
 }
 
 *,
