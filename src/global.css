@@ -46,6 +46,13 @@ body {
     transform: rotate(90deg);
 }
 
+h1 {
+    font-family: "Poppins Medium", sans-serif;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 1.05;
+    color: var(--color-primary-dark);
+}
+
 h2 {
   color: var(--color-primary-dark);
 }
