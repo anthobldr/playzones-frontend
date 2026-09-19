@@ -1,9 +1,9 @@
-import style from "./Layout.module.css"
 import { navLinks } from "../../data/navLinks";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { logout } from "../../services/auth.service";
 import { getAvatarUrl } from "../../services/avatar.service";
+import style from "./css/Navbar.module.css"
 
 export default function Navbar() {
     const { user, setUser } = useAuth();
@@ -23,11 +23,8 @@ export default function Navbar() {
                         <div className="d-flex align-items-center">
                             <img src="/logo.png" alt="Logo PlayZone" width="150" className="ms-lg-4" />
                         </div>
-                        <button className={`navbar-toggler bg-white shadow-sm ${style.menuBurger}`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Ouvrir le menu de navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul className={`navbar-nav mx-auto text-center text-lg-start my-5 my-lg-0 mb-lg-0 gap-3 ${style.navList}`}>
+                        <div className="d-none d-lg-flex flex-grow-1">
+                            <ul className={`navbar-nav mx-auto text-lg-start ps-3 ps-lg-0 mt-5 my-lg-0 mb-lg-0 gap-3 ${style.navList}`}>
                                 {navLinks.map((link, index) => (
                                     <li className="nav-item" key={link.label}>
                                         <Link className={`nav-link ${index === 0 ? style.active : ""}`} to={link.to}>
@@ -36,13 +33,42 @@ export default function Navbar() {
                                     </li>
                                 ))}
                             </ul>
-                            <div className="d-flex gap-3 me-lg-3 flex-wrap justify-content-center">
+                            <hr className="d-lg-none my-5"/>
+                            <div className="d-flex flex-column flex-lg-row gap-3 me-lg-3 px-3 px-lg-0 flex-wrap justify-content-center">
                                 <Link to="/auth/login" className={`btn rounded-5 px-3 py-2 ${style.btnConnexion}`}>
                                     <i className="bi bi-person me-2" aria-hidden="true"></i>Se connecter
                                 </Link>
                                 <Link to="/auth/register" className={`btn rounded-5 px-3 py-2 ${style.btnInscription}`}>
                                     <i className="bi bi-person-plus me-2" aria-hidden="true"></i>S'inscrire
                                 </Link>
+                            </div>
+                        </div>
+                        {/* Menu burger + Responsive navbar */}
+                        <button className={`navbar-toggler bg-white shadow-sm ${style.menuBurger}`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Ouvrir le menu de navigation">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+                        <div className={`collapse d-lg-none shadow ${style.mobileMenu}`} id="navbarSupportedContent">
+                            <ul className={`navbar-nav mx-auto gap-3 px-3 ${style.navList}`}>
+                                {navLinks.map((link, index) => (
+                                    <li className="nav-item" key={link.label}>
+                                        <Link className={`nav-link ps-3 ${index === 0 ? `${style.active} rounded-4 py-3 text-decoration-none` : ""}`} to={link.to}>
+                                            <i className={`${link.icon} menu-icon me-3`}></i>
+                                            {link.label}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                            <hr className="d-lg-none my-5 mx-2"/>
+                            <div className="d-flex flex-column flex-lg-row gap-3 me-lg-3 px-3 px-lg-0 flex-wrap justify-content-center">
+                                <Link to="/auth/login" className={`btn rounded-5 px-3 py-2 ${style.btnConnexion}`}>
+                                    <i className="bi bi-person me-2" aria-hidden="true"></i>Se connecter
+                                </Link>
+                                <Link to="/auth/register" className={`btn rounded-5 px-3 py-2 ${style.btnInscription}`}>
+                                    <i className="bi bi-person-plus me-2" aria-hidden="true"></i>S'inscrire
+                                </Link>
+                            </div>
+                            <div className="text-center mt-5">
+                                <img src="/responsive-navbar-img.png" alt="" width={210}/>
                             </div>
                         </div>
                     </div>
@@ -52,14 +78,17 @@ export default function Navbar() {
             {user && (
                 <nav className="navbar navbar-expand-lg">
                     <div className="container-fluid">
-                        <div className="d-flex align-items-center">
-                            <img src="/logo.png" alt="Logo PlayZone" width="150" className="ms-lg-4" />
-                        </div>
-                        <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Ouvrir le menu de navigation">
+                        <button className={`navbar-toggler bg-white shadow-sm ${style.menuBurger}`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Ouvrir le menu de navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul className={`navbar-nav mx-auto mb-2 mb-lg-0 gap-3 ${style.navList}`}>
+                        <div className="d-flex">
+                            <img src="/logo.png" alt="Logo PlayZone" width="150" className="ms-lg-4" />
+                        </div>
+                        <button className="d-lg-none btn rounded-pill d-flex align-items-center border-0 p-2 pe-3">
+                            <img src={getAvatarUrl(user?.avatar)} alt={`Avatar de ${user?.username ?? "Invité"}`} className={`rounded-circle ${style.navbarAvatar}`} />
+                        </button>
+                        <div className="d-none d-lg-flex flex-grow-1 align-items-center">
+                            <ul className={`navbar-nav mx-auto text-lg-start ps-3 ps-lg-0 mt-5 my-lg-0 mb-lg-0 gap-3 ${style.navList}`}>
                                 {navLinks.map((link, index) => (
                                     <li className="nav-item" key={link.label}>
                                         <Link className={`nav-link ${index === 0 ? style.active : ""}`} to={link.to}>
@@ -95,6 +124,34 @@ export default function Navbar() {
                                         </li>
                                     </ul>
                                 </div>
+                            </div>
+                        </div>
+                        {/* Menu burger + Responsive navbar */}
+                        <div className={`collapse d-lg-none shadow ${style.mobileMenu}`} id="navbarSupportedContent">
+                            <ul className={`navbar-nav mx-auto gap-3 px-3 ${style.navList}`}>
+                                {navLinks.map((link, index) => (
+                                    <li className="nav-item" key={link.label}>
+                                        <Link className={`nav-link ps-3 ${index === 0 ? `${style.active} rounded-4 py-3 text-decoration-none` : ""}`} to={link.to}>
+                                            <i className={`${link.icon} menu-icon me-3`}></i>
+                                            {link.label}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                            <hr className="d-lg-none my-5 mx-2"/>
+                            <div className="d-flex flex-column flex-lg-row gap-3 me-lg-3 px-3 px-lg-0 flex-wrap justify-content-center">
+                                <ul className="d-flex flex-column gap-4 list-unstyled">
+                                    <li className="ps-3">
+                                        <Link to="/account/dashboard" className="dropdown-item rounded-3">Tableau de bord</Link>
+                                    </li>
+                                    <li className="ps-3 text-danger">
+                                        <i className="bi bi-box-arrow-right me-2"></i>
+                                        <Link to={"/auth/logout"} className="text-decoration-none text-danger">Deconnexion</Link>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="text-center mt-5">
+                                <img src="/responsive-navbar-img.png" alt="" width={210}/>
                             </div>
                         </div>
                     </div>
