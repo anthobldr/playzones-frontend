@@ -15,6 +15,17 @@ nav li > a{
     text-decoration-thickness: 2px;
 }
 
+.menuBurger {
+    width: 44px;
+    height: 44px;
+    padding: 10px 10px 10px 10px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .btnConnexion{
     border: 1px solid #6C4DFF;
 }
