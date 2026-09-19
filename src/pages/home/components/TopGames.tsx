@@ -4,25 +4,21 @@ import { games } from "../../../data/games";
 
 export default function TopGames() {
     return (
-        <section className={`container-fluid ${style.topGames} py-5 mt-5`}>
-            <div className="text-center mb-5">
+        <section className={`container-fluid ${style.topGames} pb-5`}>
+            <div className="text-center pt-5 lh-1">
                 <h2>
                     <i className="bi bi-controller me-2" aria-hidden="true"></i>
                     Nos jeux populaires
                 </h2>
-
-                <p className="text-secondary">
-                    Choisis ton jeu et lance-toi dans l'aventure !
-                </p>
+                <p className="text-secondary">Choisis ton jeu et lance-toi dans l'aventure !</p>
             </div>
-
-            <div className="d-flex justify-content-center gap-4 gap-lg-5 flex-wrap">
+            <div className="d-flex justify-content-center gap-3 gap-lg-4 flex-wrap pt-4">
                 {games.map((game, index) => (
                     <CardGames key={index} img={game.img} game={game.name} desc={game.desc}/>
                 ))}
             </div>
-            <div className="text-center my-5">
-                <a href="#" className={`text-decoration-none py-3 px-5 rounded-5 ${style.btnAllGames}`}>
+            <div className="text-center pt-5">
+                <a href="#" className={`bg-warning fw-bold text-decoration-none py-3 px-5 shadow-sm rounded-5 ${style.btnAllGames}`}>
                     Voir tous les jeux <i className="ps-3 fw-bold bi bi-grid" aria-hidden="true"></i>
                 </a>
             </div>
