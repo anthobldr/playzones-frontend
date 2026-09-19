@@ -1,4 +1,4 @@
-import style from "./Layout.module.css";
+import style from "./css/Hero.module.css";
 import { ReactNode } from "react";
 
 interface HeroProps {
@@ -14,9 +14,9 @@ export default function Hero({ title, titleAccent, text, imageSrc, imageAlt, chi
     return (
         <section className={`${style.hero} position-relative overflow-hidden`}>
             <div className="container h-100">
-                <div className="row align-items-center h-100">
-                    <div className="col-lg-6">
-                        <h1 className={style.title}>
+                <div className="row h-100">
+                    <div className={`col-12 col-lg-6 ${style.heroContent}`}>
+                        <h1 className="text-start">
                             {title}
                             {titleAccent && (
                                 <>
@@ -25,14 +25,18 @@ export default function Hero({ title, titleAccent, text, imageSrc, imageAlt, chi
                                 </>
                             )}
                         </h1>
-                        <div className={`${style.text} mt-4`}>{text}</div>
-
+                        <div className={`${style.text} d-none d-lg-block text-start mt-4`}>{text}</div>
+                        <div className="row d-lg-none">
+                            <div className="col-7">
+                                <div className={`${style.text} text-start mt-4`}>{text}</div>
+                            </div>
+                        </div>
                         {children && <div className="mt-5">{children}</div>}
                     </div>
                 </div>
             </div>
-            <div className={`${style.heroVisual} d-none d-lg-flex position-absolute top-0 end-0 h-100 justify-content-center align-items-center`}>
-                <img src={imageSrc} alt={imageAlt} className={`${style.heroImg} mw-100`} />
+            <div className={`d-lg-flex position-absolute top-0 end-0 h-100 align-items-center ${style.heroVisual}`}>
+                <img src={imageSrc} alt={imageAlt} className={`${style.heroImg}`} />
             </div>
         </section>
     );
