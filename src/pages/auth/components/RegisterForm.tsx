@@ -64,7 +64,7 @@ export default function RegisterForm() {
     return (
         <section className="container">
             <div className="row">
-                <div className="col-lg-12 bg-body rounded-4 shadow ms-lg-5 px-5 py-3">
+                <div className="col-lg-12 bg-white rounded-4 shadow ms-lg-5 px-5 py-3">
                     {error && (
                         <div className="alert alert-danger mt-3">
                             <i className="bi bi-exclamation-circle text-danger pe-2"></i>

@@ -17,12 +17,11 @@ const socialLinks = [
 export default function Footer() {
     return (
         <footer className={style.footer}>
-            <div className="row py-5 px-4 px-lg-5">
+            <div className="row py-5 px-4 px-lg-5 M-0">
                 <div className="col-12 col-lg-3 mb-4 mb-lg-0">
                     <h2 className="text-white">Play<span className="text-warning">Zone</span></h2>
                     <p className="text-white">
-                        La meilleure expérience de jeux de société en ligne.
-                        <br />Amuse-toi, défie, gagne !
+                        La meilleure expérience de jeux de société en ligne. Amuse-toi, défie, gagne !
                     </p>
                 </div>
                 <div className="col-6 col-lg-3 mb-4 mb-lg-0">

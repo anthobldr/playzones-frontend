@@ -150,8 +150,8 @@ export default function Navbar() {
                                     </li>
                                 </ul>
                             </div>
-                            <div className="text-center mt-5">
-                                <img src="/responsive-navbar-img.png" alt="" width={210}/>
+                            <div className="text-center mt-2">
+                                <img src="/responsive-navbar-img.png" alt="" width={200}/>
                             </div>
                         </div>
                     </div>

@@ -25,9 +25,9 @@ export default function LoginForm(){
     }
     
     return(
-        <section className="container">
+        <section className="container mb-4">
             <div className="row">
-                <div className="col-lg-12 bg-body rounded-4 shadow ms-lg-5 px-5 py-3">
+                <div className="col-lg-12 bg-white rounded-4 shadow ms-lg-5 px-5 py-3">
                     {error && <div className="alert alert-danger mt-3"><i className="bi bi-exclamation-circle text-danger pe-2"></i>{error}</div>}
                     <h2 className="my-4 fw-bold">Connexion</h2>
                     <div className="d-flex flex-column gap-4">
