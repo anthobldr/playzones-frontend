@@ -44,10 +44,10 @@ export default function Navbar() {
                             </div>
                         </div>
                         {/* Menu burger + Responsive navbar */}
-                        <button className={`navbar-toggler bg-white shadow-sm ${style.menuBurger}`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Ouvrir le menu de navigation">
+                        <button className={`navbar-toggler bg-white shadow-sm menuBurger`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Ouvrir le menu de navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div className={`collapse d-lg-none shadow ${style.mobileMenu}`} id="navbarSupportedContent">
+                        <div className={`collapse d-lg-none shadow mobileMenu`} id="navbarSupportedContent">
                             <ul className={`navbar-nav mx-auto gap-3 px-3 ${style.navList}`}>
                                 {navLinks.map((link, index) => (
                                     <li className="nav-item" key={link.label}>
@@ -78,7 +78,7 @@ export default function Navbar() {
             {user && (
                 <nav className="navbar navbar-expand-lg">
                     <div className="container-fluid">
-                        <button className={`navbar-toggler bg-white shadow-sm ${style.menuBurger}`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Ouvrir le menu de navigation">
+                        <button className={`navbar-toggler bg-white shadow-sm menuBurger`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Ouvrir le menu de navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="d-flex">
@@ -127,7 +127,7 @@ export default function Navbar() {
                             </div>
                         </div>
                         {/* Menu burger + Responsive navbar */}
-                        <div className={`collapse d-lg-none shadow ${style.mobileMenu}`} id="navbarSupportedContent">
+                        <div className={`collapse d-lg-none shadow mobileMenu`} id="navbarSupportedContent">
                             <ul className={`navbar-nav mx-auto gap-3 px-3 ${style.navList}`}>
                                 {navLinks.map((link, index) => (
                                     <li className="nav-item" key={link.label}>

@@ -1,5 +1,5 @@
 import AsideBar from "../../../components/layout/AsideBar";
-import TopBar from "../TopBar";
+import TopBar from "../components/TopBar";
 import Avatar from "./Avatar";
 
 export default function Profil(){

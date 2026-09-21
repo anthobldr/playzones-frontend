@@ -8,30 +8,10 @@ nav li > a{
 }
 
 .active{
-        background-color: var(--color-primary);
-        color: var(--color-white) !important;
-    }
-
-.menuBurger {
-    width: 44px;
-    height: 44px;
-    padding: 10px 10px 10px 10px;
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: var(--color-primary);
+    color: var(--color-white) !important;
 }
 
-.mobileMenu {
-    position: fixed;
-    top: 80px;
-    left: 0;
-    width: min(50vw, 320px);
-    height: calc(100vh - 80px);
-    background: var(--color-bg);
-    z-index: 1000;
-}
 .navbarAvatar{
     width: 44px !important;
     height: 44px !important;

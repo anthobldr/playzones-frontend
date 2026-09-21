@@ -1,4 +1,4 @@
-import style from "./css/HistoryCardGames.module.css"
+import style from "../css/HistoryCardGames.module.css"
 interface HistoryCardGames{img:string; game:string; desc:string; win:boolean;}
 
 export default function HistoryGames(){

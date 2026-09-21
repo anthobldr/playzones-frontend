@@ -1,4 +1,4 @@
-import style from "./css/CardChallenge.module.css"
+import style from "../css/CardChallenge.module.css"
 interface CardChallengesProps{icon:string;name:string;desc:string;value:string;progress:number;color:string;}
 
 export default function CardChallanges({icon, name, desc, value, progress, color}: CardChallengesProps){

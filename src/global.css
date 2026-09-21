@@ -41,6 +41,27 @@ body {
     transform: rotate(90deg);
 }
 
+.menuBurger {
+    width: 44px;
+    height: 44px;
+    padding: 10px 10px 10px 10px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobileMenu {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: min(50vw, 320px);
+    height: calc(100vh - 80px);
+    background: var(--color-bg);
+    z-index: 1000;
+}
+
 h1 {
     font-family: "Poppins Medium", sans-serif;
     font-size: clamp(2.25rem, 5vw, 4rem);

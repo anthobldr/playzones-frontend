@@ -1,13 +1,12 @@
 import { useAuth } from "../../hooks/useAuth";
 import AsideBar from "../../components/layout/AsideBar";
-import TopBar from "./TopBar";
-import ProfilStatCard from "./ProfilStatCard";
-import style from "./css/ProfilStatCard.module.css"
-import HistoryGames from "./HistoryGames";
-import CardChallanges from "./CardChallenge";
-import Activity from "./Activity";
-import TrophyClassement from "./TrophyClassement";
+import TopBar from "./components/TopBar";
+import HistoryGames from "./components/HistoryGames";
+import CardChallanges from "./components/CardChallenge";
+import Activity from "./components/Activity";
+import TrophyClassement from "./components/TrophyClassement";
 import Footer from "../../components/layout/Footer";
+import style from "./css/ProfilStatCard.module.css"
 
 export default function Profil(){
     const { user } = useAuth();
@@ -31,7 +30,7 @@ export default function Profil(){
                 <div className="col-lg-10">
                     <TopBar />
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-8 px-4 px-lg-3">
                             <h1>Bonjour, {user.username} ! 👋</h1>
                             <span>Prêt pour une nouvelle partie ?</span>
                         </div>
@@ -74,4 +73,20 @@ export default function Profil(){
             <Footer />
         </div>
     )
+}
+
+interface ProfilStatCardProps {icon: string; colorClass: string; label: string; value: string;}
+
+export function ProfilStatCard({ icon, colorClass, label, value }: ProfilStatCardProps) {
+    return (
+        <div className={`d-flex align-items-center gap-3 bg-white rounded-4 shadow-sm px-4 py-3`}>
+            <div className={`${style.statIcon} ${colorClass} rounded-circle d-flex justify-content-center align-items-center text-white flex-shrink-0`}>
+                <i className={icon} aria-hidden="true"></i>
+            </div>
+            <div>
+                <small className="text-muted">{label}</small>
+                <p className={`statValue mb-0 fw-bold`}>{value}</p>
+            </div>
+        </div>
+    );
 }
