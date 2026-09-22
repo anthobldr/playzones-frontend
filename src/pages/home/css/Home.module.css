@@ -51,9 +51,3 @@
         text-align: center;
     }
 }
-
-@media (max-width: 575px) {
-    .hero {
-        padding-top: 48px;
-    }
-}
