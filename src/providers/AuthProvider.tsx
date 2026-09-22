@@ -20,9 +20,9 @@ export function AuthProvider({children}: AuthProviderProps){
         getCurrentUser()
             .then(data => {
                 if(data) {
-                    setUser(data.user); // Adaptez selon votre backend
+                    setUser(data.user);
                 } else {
-                    setUser(null); // ✅ Gérez le null explicitement
+                    setUser(null);
                 }
             })
             .catch((error) => {
