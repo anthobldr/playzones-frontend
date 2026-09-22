@@ -1,19 +1,11 @@
 import { navLinks } from "../../data/navLinks";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { logout } from "../../services/auth.service";
 import { getAvatarUrl } from "../../services/avatar.service";
 import style from "./css/Navbar.module.css"
 
 export default function Navbar() {
     const { user, setUser } = useAuth();
-    const navigate = useNavigate();
-
-    async function handleLogout() {
-        await logout();
-        setUser(null);
-        navigate("/");
-    }
 
     return (
         <>
