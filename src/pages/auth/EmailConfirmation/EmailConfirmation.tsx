@@ -1,9 +1,9 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
-import Footer from "../../components/layout/Footer";
-import Navbar from "../../components/layout/Navbar";
-import styles from "./css/EmailConfirmation.module.css";
+import { useNavigate } from "react-router-dom";
+import Footer from "@/components/layout/Footer"
+import Navbar from "@/components/layout/Navbar"
+import styles from "./EmailConfirmation.module.css";
 import { useEffect, useState } from "react";
-import { register, resendCode, verifyEmail } from "../../services/auth.service";
+import { resendCode, verifyEmail } from "@/services/auth.service";
 
 const CODE_LENGTH = 6;
 const RESEND_DELAY = 120;
