@@ -1,8 +1,4 @@
-interface Avatar {
-    style: string;
-    seed: string;
-    options: Record<string, string | string[]>;
-}
+import type { Avatar } from "@/types";
 
 export function getAvatarUrl(avatar: Avatar): string {
     const url = new URL(`https://api.dicebear.com/9.x/${avatar.style}/svg`);

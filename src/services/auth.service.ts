@@ -15,11 +15,11 @@ export async function verifyEmail(email: string, code: string){
     return data;
 }
 
-export async function resendCode(email: string, username:string){
+export async function resendCode(email: string){
     const response = await fetch(`${API_URL}/auth/resend-code`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({email, username}),   
+        body: JSON.stringify({ email }),
     });
 
     const data = await response.json();

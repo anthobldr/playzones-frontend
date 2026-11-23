@@ -1,4 +1,5 @@
 import style from "./css/Footer.module.css";
+import { Link } from "react-router-dom";
 import { navLinks } from "../../data/navLinks";
 
 const legalLinks = [
@@ -17,7 +18,7 @@ const socialLinks = [
 export default function Footer() {
     return (
         <footer className={style.footer}>
-            <div className="row py-5 px-4 px-lg-5 M-0">
+            <div className="row py-5 px-4 px-lg-5 m-0">
                 <div className="col-12 col-lg-3 mb-4 mb-lg-0">
                     <h2 className="text-white">Play<span className="text-warning">Zone</span></h2>
                     <p className="text-white">
@@ -29,9 +30,9 @@ export default function Footer() {
                     <ul className="list-unstyled d-flex flex-column gap-2 text-center">
                         {navLinks.map((link) => (
                             <li key={link.label}>
-                                <a href={link.href} className="text-white text-decoration-none">
+                                <Link to={link.to} className="text-white text-decoration-none">
                                     {link.label}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>

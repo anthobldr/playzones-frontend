@@ -26,6 +26,7 @@ export default function ResetPassword(){
             <ResetPasswordForm />
             </Hero>
         </main>
+        <Footer />
     </>
     )
 }

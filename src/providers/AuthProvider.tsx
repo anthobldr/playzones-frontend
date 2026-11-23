@@ -1,12 +1,8 @@
-import { useEffect, useState, ReactNode } from "react";
+import { useEffect, useState } from "react";
+import type { ReactNode } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { getCurrentUser } from "../services/auth.service";
-
-interface User {
-    id:number;
-    email:string;
-    username:string;
-}
+import type { User } from "@/types";
 
 interface AuthProviderProps {
     children:ReactNode;

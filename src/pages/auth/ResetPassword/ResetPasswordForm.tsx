@@ -10,27 +10,39 @@ export default function ResetPasswordForm(){
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [error, setError] = useState<string>("");
 
-    async function handleResetPassword(){
-        if(password === confirmPassword){
-            try{
-                await resetPassword(token, password, confirmPassword);
-                navigate("/auth/login");
-            }catch(error){
-                setError(error instanceof Error ? error.message : "Une erreur est survenue. Veuillez réessayer.");
-            }
-        } else {
-            setError("Les mots de passe ne correspondent pas.");
-        }
+    if (!token) {
+        return <Navigate to="/auth/forgot-password" replace />;
     }
+
+    const handleResetPassword = async () => {
+        setError("");
+
+        if (password !== confirmPassword) {
+            setError("Les mots de passe ne correspondent pas.");
+            return;
+        }
+
+        try {
+            await resetPassword(token, password, confirmPassword);
+            navigate("/auth/login");
+        } catch (error) {
+            setError(error instanceof Error ? error.message : "Une erreur est survenue. Veuillez réessayer.");
+        }
+    };
     return (
         <section className="container mb-4">
             <div className="row">
                 <div className="col-12 bg-white shadow-sm rounded-4 py-4 py-lg-5 px-4">
+                    {error && (
+                        <div className="alert alert-danger mt-3">
+                            <i className="bi bi-exclamation-circle text-danger pe-2"></i>
+                            {error}
+                        </div>
+                    )}
                     <div className="d-flex justify-content-center mb-2">
                         <i className={`bi bi-lock-fill d-flex justify-content-center align-items-center rounded-circle ${style.securityIcon}`} />
                     </div>
                     <div className="text-center">
-                        <span>{token}</span>
                         <h2>Définis ton nouveau <br /><span className={style.primaryText}>mot de passe</span></h2>
                         <p className="lh-sm">
                             Ton mot de passe doit contenir au moins 8 caractères, <br className="d-none d-lg-block"/> avec une majuscule, une minuscule et un chiffre.

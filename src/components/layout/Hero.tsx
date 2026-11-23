@@ -1,5 +1,5 @@
 import style from "./css/Hero.module.css";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface HeroProps {
     title: string;

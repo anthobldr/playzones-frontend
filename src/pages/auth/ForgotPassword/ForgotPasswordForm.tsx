@@ -23,6 +23,12 @@ export default function ForgotPasswordForm(){
             <div className="row">
                 {!send ? (
                     <div className="col-12 bg-white shadow-sm rounded-4 py-4 py-lg-5 px-4">
+                        {error && (
+                            <div className="alert alert-danger mt-3">
+                                <i className="bi bi-exclamation-circle text-danger pe-2"></i>
+                                {error}
+                            </div>
+                        )}
                         <div className="d-flex justify-content-center mb-2">
                             <i className={`bi bi-envelope-fill d-flex justify-content-center align-items-center rounded-circle ${style.emailIcon}`} />
                         </div>

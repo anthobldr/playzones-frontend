@@ -5,7 +5,7 @@ import { getAvatarUrl } from "../../services/avatar.service";
 import style from "./css/Navbar.module.css"
 
 export default function Navbar() {
-    const { user, setUser } = useAuth();
+    const { user } = useAuth();
 
     return (
         <>

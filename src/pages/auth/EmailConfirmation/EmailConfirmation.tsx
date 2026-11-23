@@ -10,7 +10,7 @@ const RESEND_DELAY = 120;
 
 export default function EmailConfirmation() {
     const navigate = useNavigate();
-    const [email, setEmail] = useState(() => localStorage.getItem("registerEmail") ?? "");
+    const [email] = useState(() => localStorage.getItem("registerEmail") ?? "");
     const [error, setError] = useState("");
     const [code, setCode] = useState("");
     const [secondsLeft, setSecondsLeft] = useState(RESEND_DELAY);
@@ -34,7 +34,7 @@ export default function EmailConfirmation() {
         if(secondsLeft > 0) return;
 
         try{
-            await resendCode(email, username);
+            await resendCode(email);
             setSecondsLeft(RESEND_DELAY);
         } catch(error){
             setError(error instanceof Error ? error.message : "Impossible de renvoyer le code.")
@@ -50,7 +50,7 @@ export default function EmailConfirmation() {
         
         // Focus sur l'input suivant (optionnel)
         if (value && index < CODE_LENGTH - 1) {
-            document.querySelector(`input[aria-label="Chiffre ${index + 2}"]`)?.focus();
+            document.querySelector<HTMLInputElement>(`input[aria-label="Chiffre ${index + 2}"]`)?.focus();
         }
     }
 
@@ -82,6 +82,12 @@ export default function EmailConfirmation() {
             </header>
             <main className="row justify-content-center align-items-center text-center my-5">
                 <section className="col-11 col-lg-6 bg-white rounded-4 shadow-sm py-4 py-lg-5">
+                    {error && (
+                        <div className="alert alert-danger mt-3">
+                            <i className="bi bi-exclamation-circle text-danger pe-2"></i>
+                            {error}
+                        </div>
+                    )}
                     <div className="d-flex justify-content-center mb-3">
                         <i className={`bi bi-envelope-fill d-flex justify-content-center align-items-center rounded-circle ${styles.emailIcon}`} />
                     </div>

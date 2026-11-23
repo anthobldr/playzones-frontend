@@ -1,5 +1,5 @@
 import style from "./css/CardGames.module.css"
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface CardGamesProps{img:string; game:string; desc:string; children?: ReactNode;}
 

@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router-dom"
 import { items } from "../../data/dashboardNavLinks";
-import style from "./css/AsideBar.module.css"
 
 export default function AsideBar(){
     const location = useLocation();
