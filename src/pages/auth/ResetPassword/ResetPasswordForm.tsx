@@ -45,7 +45,7 @@ export default function ResetPasswordForm(){
                     <div className="text-center">
                         <h2>Définis ton nouveau <br /><span className={style.primaryText}>mot de passe</span></h2>
                         <p className="lh-sm">
-                            Ton mot de passe doit contenir au moins 8 caractères, <br className="d-none d-lg-block"/> avec une majuscule, une minuscule et un chiffre.
+                            Ton mot de passe doit contenir au moins 8 caractères, <br className="d-none d-lg-block"/> avec une majuscule, un chiffre et un caractère spécial.
                         </p>
                     </div>
                     <form className="d-flex flex-column gap-3 gap-lg-4" onSubmit={(e) => {e.preventDefault(); handleResetPassword();}}>
