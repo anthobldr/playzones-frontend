@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "@/services/auth.service"
 import { useAuth } from "@/hooks/useAuth";
 
@@ -58,7 +58,7 @@ export default function LoginForm(){
                             </div>
                         </div>
                         <div className="d-flex flex-column">
-                            <a className="text-decoration-none" href="#">Mot de passe oublié ?</a>
+                            <Link className="text-decoration-none" to={"/auth/forgot-password"}>Mot de passe oublié ?</Link>
                             <button onClick={handleLogin} className="text-white my-4 py-2 rounded-4 border-0">
                                 Se connecter <i className="bi bi-arrow-right-circle-fill ms-2"></i>
                             </button>

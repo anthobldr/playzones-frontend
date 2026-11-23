@@ -5,7 +5,7 @@ export async function verifyEmail(email: string, code: string){
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, code }),
-    })
+    });
 
     const data = await response.json();
     if(!response.ok){
@@ -20,7 +20,7 @@ export async function resendCode(email: string, username:string){
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({email, username}),   
-    })
+    });
 
     const data = await response.json();
     if(!response.ok){
@@ -28,6 +28,32 @@ export async function resendCode(email: string, username:string){
     }
 
     return data;
+}
+
+export async function sendForgotPasswordEmail(email: string){
+    const response = await fetch(`${API_URL}/auth/forgot-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({email}),
+    });
+
+    const data = await response.json();
+    if(!response.ok){
+        throw new Error(data.error);
+    }
+}
+
+export async function resetPassword(token: string, password: string, confirmPassword: string){
+    const response = await fetch(`${API_URL}/auth/reset-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({token, password, confirmPassword}),
+    });
+    
+    const data = await response.json();
+    if(!response.ok){
+        throw new Error(data.error);
+    }
 }
 
 export async function register(email: string, username: string, password: string, confirmPassword: string){
@@ -51,7 +77,7 @@ export async function login(email: string, password: string){
         credentials: "include",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({email, password}),
-    })
+    });
 
     const data = await response.json();
     if(!response.ok){
@@ -65,6 +91,7 @@ export async function getCurrentUser(){
     const response = await fetch(`${API_URL}/auth/me`,{
         credentials: "include"
     });
+
     if(!response.ok){
         return null;
     }
