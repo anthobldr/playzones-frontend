@@ -1,6 +1,9 @@
 import type { Avatar } from "@/types";
 
-export function getAvatarUrl(avatar: Avatar): string {
+const DEFAULT_AVATAR_URL = "https://api.dicebear.com/9.x/adventurer-neutral/svg?seed=playzone";
+
+export function getAvatarUrl(avatar?: Avatar | null): string {
+    if (!avatar) return DEFAULT_AVATAR_URL;
     const url = new URL(`https://api.dicebear.com/9.x/${avatar.style}/svg`);
 
     url.searchParams.set("seed", avatar.seed);

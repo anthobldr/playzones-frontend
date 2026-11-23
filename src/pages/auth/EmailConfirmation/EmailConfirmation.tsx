@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 import Footer from "@/components/layout/Footer"
 import Navbar from "@/components/layout/Navbar"
 import styles from "./EmailConfirmation.module.css";
@@ -10,7 +11,9 @@ const RESEND_DELAY = 120;
 
 export default function EmailConfirmation() {
     const navigate = useNavigate();
-    const [email] = useState(() => localStorage.getItem("registerEmail") ?? "");
+    const location = useLocation();
+    const { setUser } = useAuth();
+    const email: string = location.state?.email ?? "";
     const [error, setError] = useState("");
     const [code, setCode] = useState("");
     const [secondsLeft, setSecondsLeft] = useState(RESEND_DELAY);
@@ -23,6 +26,10 @@ export default function EmailConfirmation() {
 
         return () => clearInterval(interval);
     }, [secondsLeft]);
+
+    if (!email) {
+        return <Navigate to="/auth/register" replace />;
+    }
 
     function formatTime(totalSeconds: number) {
         const minutes = Math.floor(totalSeconds / 60);
@@ -57,21 +64,17 @@ export default function EmailConfirmation() {
     async function handleVerifyCode(){
         setError("");
 
-        if(!code){
-            setError("Veuillez entrer le code");
-            return
+        if (code.length !== CODE_LENGTH) {
+            setError("Le code doit contenir 6 chiffres.");
+            return;
         }
 
-        try{
+        try {
             const data = await verifyEmail(email, code);
-            localStorage.setItem("accessToken", data.accessToken);
-            localStorage.setItem("user", JSON.stringify(data.user));
-
-            navigate("/account/dashboard");
-        } catch(error){
-            if(error instanceof Error){
-                setError(error.message);
-            }
+            setUser(data.user);
+            navigate("/account/dashboard", { replace: true });
+        } catch (error) {
+            setError(error instanceof Error ? error.message : "Erreur lors de la vérification.");
         }
     }
 

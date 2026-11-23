@@ -12,7 +12,7 @@ export default function ProtectedRoute({ children }: { children: ReactNode }){
 
     // Pas connecté ou token invalide
     if(!user){
-        return <Navigate to="/auth/login" />;
+        return <Navigate to="/auth/login" replace />;
     }
 
     return children;

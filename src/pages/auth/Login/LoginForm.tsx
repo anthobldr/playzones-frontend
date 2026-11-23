@@ -15,10 +15,7 @@ export default function LoginForm(){
     async function handleLogin(){
         try {
             const data = await login(email, password);
-
-            localStorage.setItem("accessToken", data.accessToken);
             setUser(data.user);
-            
             navigate("/account/dashboard");
         } catch(error){
             if(error instanceof Error){

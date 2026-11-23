@@ -1,0 +1,20 @@
+#newMessage{
+    background-color: var(--color-primary);
+}
+
+.selectedConversation{
+    background-color: #F1EBFF;
+}
+
+.unreadMessage{
+    background-color: var(--color-primary);
+    border-radius: 50%;
+}
+
+.messageDate{
+    background-color: #F1EBFF;
+}
+
+li:hover{
+    cursor: pointer;
+}

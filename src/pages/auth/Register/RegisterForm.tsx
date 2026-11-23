@@ -56,8 +56,7 @@ export default function RegisterForm() {
 
         try{
             await register(email, username, password, confirmPassword);
-
-            navigate("/auth/confirmation?email=" +encodeURIComponent(email));
+            navigate("/auth/confirmation", { state: { email } });
         } catch(error){
             setError(error instanceof Error ? error.message : "Une erreur est survenue. Veuillez réessayer.");
         }
