@@ -31,13 +31,7 @@ export default function AddFriendsModal({ onFriendAdded, friends }: AddFriendsMo
         const fetchSuggestions = async (): Promise<void> => {
             try {
                 setLoading(true)
-                const response = await fetch("http://localhost:8000/players/getPlayers", {
-                    credentials: "include",
-                });
-                
-                if (!response.ok) throw new Error("Erreur lors de la récupération des utilisateurs");
-                
-                const data: Player[] = await response.json();
+                const data = await friendshipService.getPlayers();
                 setSuggestions(data);
                 setError(null);
             } catch (err) {

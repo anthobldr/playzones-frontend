@@ -1,4 +1,5 @@
 import type { Avatar } from "@/types";
+import { apiFetch } from "./api";
 
 const DEFAULT_AVATAR_URL = "https://api.dicebear.com/9.x/adventurer-neutral/svg?seed=playzone";
 
@@ -19,19 +20,9 @@ export function getAvatarUrl(avatar?: Avatar | null): string {
     return url.toString();
 }
 
-export async function updateAvatar(avatar: Avatar) {
-    const response = await fetch("http://localhost:8000/avatar", {
+export function updateAvatar(avatar: Avatar) {
+    return apiFetch("/avatar", {
         method: "PATCH",
-        credentials: "include",
-        headers: {
-            "Content-Type": "application/json",
-        },
         body: JSON.stringify(avatar),
     });
-
-    const data = await response.json();
-
-    console.log(data);
-
-    return data;
 }

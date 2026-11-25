@@ -1,112 +1,59 @@
-const API_URL = "http://localhost:8000";
+import { apiFetch } from "./api";
+import type { User } from "@/types";
 
-export async function verifyEmail(email: string, code: string){
-    const response = await fetch(`${API_URL}/auth/verify-email`, {
+interface UserResponse { message?: string; user: User; }
+interface MessageResponse { message: string; }
+
+export function register(email: string, username: string, password: string, confirmPassword: string) {
+    return apiFetch<UserResponse>("/auth/register", {
         method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, username, password, confirmPassword }),
+    });
+}
+
+export function verifyEmail(email: string, code: string) {
+    return apiFetch<UserResponse>("/auth/verify-email", {
+        method: "POST",
         body: JSON.stringify({ email, code }),
     });
-
-    const data = await response.json();
-    if(!response.ok){
-        throw new Error(data.error);
-    }
-
-    return data;
 }
 
-export async function resendCode(email: string){
-    const response = await fetch(`${API_URL}/auth/resend-code`, {
+export function resendCode(email: string) {
+    return apiFetch<MessageResponse>("/auth/resend-code", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
     });
-
-    const data = await response.json();
-    if(!response.ok){
-        throw new Error(data.error);
-    }
-
-    return data;
 }
 
-export async function sendForgotPasswordEmail(email: string){
-    const response = await fetch(`${API_URL}/auth/forgot-password`, {
+export function login(email: string, password: string) {
+    return apiFetch<UserResponse>("/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({email}),
+        body: JSON.stringify({ email, password }),
     });
-
-    const data = await response.json();
-    if(!response.ok){
-        throw new Error(data.error);
-    }
 }
 
-export async function resetPassword(token: string, password: string, confirmPassword: string){
-    const response = await fetch(`${API_URL}/auth/reset-password`, {
+export function sendForgotPasswordEmail(email: string) {
+    return apiFetch<MessageResponse>("/auth/forgot-password", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({token, password, confirmPassword}),
+        body: JSON.stringify({ email }),
     });
-    
-    const data = await response.json();
-    if(!response.ok){
-        throw new Error(data.error);
-    }
 }
 
-export async function register(email: string, username: string, password: string, confirmPassword: string){
-    const response = await fetch(`${API_URL}/auth/register`, {
+export function resetPassword(token: string, password: string, confirmPassword: string) {
+    return apiFetch<MessageResponse>("/auth/reset-password", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({email: email, username: username, password: password, confirmPassword: confirmPassword}),
+        body: JSON.stringify({ token, password, confirmPassword }),
     });
-
-    const data = await response.json();
-    if(!response.ok){
-        throw new Error(data.error);
-    }
-
-    return data;
 }
 
-export async function login(email: string, password: string){
-    const response = await fetch(`${API_URL}/auth/login`, {
-        method: "POST",
-        credentials: "include",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({email, password}),
-    });
-
-    const data = await response.json();
-    if(!response.ok){
-        throw new Error(data.error);
-    }
-
-    return data;
-}
-
-export async function getCurrentUser(){
-    const response = await fetch(`${API_URL}/auth/me`,{
-        credentials: "include"
-    });
-
-    if(!response.ok){
+export async function getCurrentUser() {
+    try {
+        return await apiFetch<UserResponse>("/auth/me");
+    } catch {
         return null;
     }
-
-    return response.json();
 }
 
-export async function logout(){
-    const response = await fetch(`${API_URL}/auth/logout`, {
-        method: "POST",
-        credentials: "include",
-    });
-
-    if(!response.ok){
-        throw new Error("Erreur lors de la déconnexion.");
-    }
+export function logout() {
+    return apiFetch<void>("/auth/logout", { method: "POST" });
 }
