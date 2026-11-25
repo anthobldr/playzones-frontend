@@ -2,6 +2,7 @@ import { useAuth } from "@/hooks/useAuth";
 import AsideBar from "../../../components/layout/AsideBar";
 import TopBar from "../components/TopBar";
 import AvatarEditor from "./Avatar";
+import DeleteAccount from "./DeleteAccount";
 
 export default function Profil(){
     const { user } = useAuth();
@@ -20,6 +21,7 @@ export default function Profil(){
                         <p>Gère tes informations personnelles et ton avatar.</p>
 
                         <AvatarEditor initialAvatar={user.avatar} username={user.username} email={user.email} />
+                        <DeleteAccount />
                     </div>
                 </div>
             </div>

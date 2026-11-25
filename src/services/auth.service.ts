@@ -57,3 +57,10 @@ export async function getCurrentUser() {
 export function logout() {
     return apiFetch<void>("/auth/logout", { method: "POST" });
 }
+
+export function deleteAccount(password: string) {
+    return apiFetch<void>("/account", {
+        method: "DELETE",
+        body: JSON.stringify({ password }),
+    });
+}
