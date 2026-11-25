@@ -80,3 +80,7 @@ src/
 
 > `ProtectedRoute` améliore l'expérience utilisateur, mais la **vraie protection** est côté API :
 > toute requête non authentifiée y est refusée (401).
+
+## Déploiement
+
+Voir le [guide de déploiement](https://github.com/anthobldr/playzones-api/blob/main/DEPLOIEMENT.md).
