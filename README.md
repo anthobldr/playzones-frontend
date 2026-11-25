@@ -1,77 +1,82 @@
-# React + TypeScript + Vite
+# PlayZones — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interface web de **PlayZones**, une plateforme de jeux de société en ligne.
+Application monopage en React, conçue en *mobile-first*.
 
-Currently, two official plugins are available:
+API associée : [playzones-api](https://github.com/anthobldr/playzones-api)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack technique
 
-## React Compiler
+| Outil | Version | Rôle |
+|---|---|---|
+| React | 19 | Bibliothèque d'interface |
+| TypeScript | 6 | Typage statique |
+| Vite | 8 | Serveur de développement et build |
+| React Router | 7 | Navigation côté client |
+| Bootstrap | 5.3 | Grille responsive et composants |
+| Vitest | 5 | Tests unitaires |
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Prérequis
 
-Note: This will impact Vite dev & build performances.
+- [Node.js](https://nodejs.org/) 22 ou plus, et npm
+- L'[API PlayZones](https://github.com/anthobldr/playzones-api) lancée sur `http://localhost:8000`
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+git clone https://github.com/anthobldr/playzones-frontend.git
+cd playzones-frontend
+npm ci
+cp .env.example .env.local
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+| Variable | Description | Exemple |
+|---|---|---|
+| `VITE_API_URL` | URL de l'API | `http://localhost:8000` |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+> Les variables `VITE_*` sont incluses dans le JavaScript envoyé au navigateur :
+> **elles ne doivent jamais contenir de secret.**
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Lancer l'application
+
+```bash
+npm run dev
+```
+
+Ouvre **`http://localhost:5173`** (et non `127.0.0.1`) : le cookie de session de l'API n'est transmis que si le front et l'API sont sur le même site.
+
+## Scripts
+
+| Commande | Description |
+|---|---|
+| `npm run dev` | Serveur de développement |
+| `npm run build` | Vérification TypeScript, puis build de production dans `dist/` |
+| `npm run preview` | Prévisualisation du build de production |
+| `npm run lint` | Analyse du code avec ESLint |
+| `npm test` | Lance les tests une fois |
+| `npm run test:watch` | Relance les tests à chaque modification |
+
+## Architecture
 
 ```
+src/
+├── components/   Composants réutilisables (Navbar, Footer, Hero…)
+├── context/      Contexte d'authentification
+├── data/         Données statiques (liens de navigation, jeux)
+├── hooks/        Hooks personnalisés (useAuth)
+├── pages/        Pages de l'application (auth, home, dashboard)
+├── providers/    AuthProvider : charge l'utilisateur connecté au démarrage
+├── router/       Routes et ProtectedRoute
+├── services/     Appels à l'API (api.ts centralise fetch)
+├── types/        Types TypeScript partagés
+└── utils/        Fonctions utilitaires (validation du mot de passe)
+```
+
+## Authentification
+
+1. L'API ouvre une **session** et renvoie un cookie HttpOnly. Le front ne stocke aucun jeton.
+2. Au démarrage, `AuthProvider` appelle `GET /auth/me` pour savoir si l'utilisateur est connecté.
+3. `ProtectedRoute` redirige vers `/auth/login` les visiteurs non connectés sur les pages `/account/*`.
+
+> `ProtectedRoute` améliore l'expérience utilisateur, mais la **vraie protection** est côté API :
+> toute requête non authentifiée y est refusée (401).
