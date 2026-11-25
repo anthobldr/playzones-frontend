@@ -25,6 +25,11 @@
     cursor: pointer;
 }
 
+.color[aria-pressed="true"] {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
 .yellow { background: #FFC107; }
 .purple { background: #7C4DFF; }
 .orange { background: #FF5722; }

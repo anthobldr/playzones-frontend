@@ -20,9 +20,17 @@ export function getAvatarUrl(avatar?: Avatar | null): string {
     return url.toString();
 }
 
+interface UpdateAvatarResponse { message: string; avatar: Avatar; }
+
 export function updateAvatar(avatar: Avatar) {
-    return apiFetch("/avatar", {
+    const color = avatar.options.backgroundColor;
+
+    return apiFetch<UpdateAvatarResponse>("/avatar", {
         method: "PATCH",
-        body: JSON.stringify(avatar),
+        body: JSON.stringify({
+            style: avatar.style,
+            seed: avatar.seed,
+            backgroundColor: Array.isArray(color) ? color[0] : color ?? null,
+        }),
     });
 }
