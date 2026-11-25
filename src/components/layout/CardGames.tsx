@@ -8,7 +8,7 @@ export default function CardGames({img, game, desc, children}: CardGamesProps){
         <article className={`${style.cardGame} d-flex flex-column overflow-hidden rounded-4 shadow`}>
             <img src={img} alt={`Illustration du jeu ${game}`} className="object-fit-cover"/>
             <div className={`d-flex flex-column align-items-center flex-grow-1 text-center py-3 px-lg-4`}>
-                <h4>{game}</h4>
+                <h3>{game}</h3>
                 <p>{desc}</p>
                 {children ? (
                     children

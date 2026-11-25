@@ -36,7 +36,7 @@ export default function Features() {
                         <div className={`${style.featureIcon} ${card.bg} rounded-circle d-flex justify-content-center align-items-center`}>
                             <i className={card.icon} aria-hidden="true"></i>
                         </div>
-                        <h4 className="mt-3">{card.titre}</h4>
+                        <h3 className="mt-3">{card.titre}</h3>
                         <p>{card.text}</p>
                     </div>
                 ))}

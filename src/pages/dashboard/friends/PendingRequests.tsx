@@ -40,11 +40,11 @@ export default function PendingRequests({ pendingRequests, loading, error, onReq
         </button>
       </div>
       {loading && <p>Chargement...</p>}
-      {error && <div className="alert alert-danger">{error}</div>}
+      {error && <div className="alert alert-danger" role="alert">{error}</div>}
       {!loading && pendingRequests.length > 0 ? (
         <div className="px-2">
           <div className="d-flex gap-1">
-            <h4>Demande d'amis</h4>
+            <h2>Demande d'amis</h2>
             <small className="text-secondary">({pendingRequests.length})</small>
           </div>
           <ul className="list-unstyled d-flex gap-3 flex-column mt-lg-3">

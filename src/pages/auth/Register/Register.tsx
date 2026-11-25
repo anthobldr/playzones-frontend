@@ -7,8 +7,11 @@ import CTABanner from "@/pages/home/components/CTABanner"
 export default function Register(){
     return (
             <>
-            <Navbar />
-            <Hero
+            <header>
+                <Navbar />
+            </header>
+            <main>
+                <Hero
                 title="Rejoins"
                 titleAccent="l'aventure !"
                 text={
@@ -20,11 +23,12 @@ export default function Register(){
                 }
                 imageSrc="/hero-cover.png"
                 imageAlt="Illustration de deux joueurs s'affrontant sur un plateau de jeu"
-            >
+                >
                 <RegisterForm />
                 </Hero>
                 <CTABanner />
-                <Footer />
+            </main>
+            <Footer />
             </>
         )
 }

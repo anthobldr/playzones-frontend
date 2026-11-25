@@ -56,37 +56,37 @@ export default function AvatarEditor({ initialAvatar, username, email }: AvatarE
                         </div>
                         <div className="col-12 col-lg-3">
                             <div className="mb-4">
-                                <label className="fw-semibold mb-2 d-block">Catégorie</label>
-                                <select className="form-select rounded-4" value={avatar.style} onChange={handleStyleChange}>
+                                <label className="fw-semibold mb-2 d-block" htmlFor="avatar_style">Catégorie</label>
+                                <select id="avatar_style" className="form-select rounded-4" value={avatar.style} onChange={handleStyleChange}>
                                     {avatarStyles.map((style, index) =>(
                                         <option key={index} value={style.id}>{style.label}</option>
                                     ))}
                                 </select>
                             </div>
-                            <div>
-                                <label className="fw-semibold mb-2 d-block">Couleur de fond</label>
+                            <fieldset>
+                                <legend className="fw-semibold mb-2 fs-6">Couleur de fond</legend>
                                 <div className="d-flex gap-2">
                                     {avatarColors.map((color) => (
                                         <button type="button" key={color} className="color rounded-circle border-0" aria-label={`Fond #${color}`} style={{backgroundColor: `#${color}`}} onClick={() => handleBackgroundColorChange(color)} />
                                     ))}
                                 </div>
-                            </div>
+                            </fieldset>
                         </div>
                     </div>
                 </div>
                 <div className="col-12 col-lg-5 ps-4 border rounded-4 shadow-sm py-3 mt-4 mt-lg-0">
                     <h3>Informations personnelles</h3>
                     <div className="mb-3">
-                        <label>Nom d'utilisateur</label>
-                        <input className="form-control" type="text" value={username} readOnly/>
+                        <label htmlFor="profil_username">Nom d'utilisateur</label>
+                        <input id="profil_username" className="form-control" type="text" value={username} readOnly/>
                     </div>
                     <div className="mb-3">
-                        <label>Email</label>
-                        <input className="form-control" type="email" value={email} readOnly/>
+                        <label htmlFor="profil_email">Email</label>
+                        <input id="profil_email" className="form-control" type="email" value={email} readOnly/>
                     </div>
                     <div className="mb-3">
-                        <label>Bio</label>
-                        <textarea className="form-control" rows={4} />
+                        <label htmlFor="profil_bio">Bio</label>
+                        <textarea id="profil_bio" className="form-control" rows={4} />
                     </div>
                 </div>
             </div>

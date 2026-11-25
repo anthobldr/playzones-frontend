@@ -24,8 +24,8 @@ export default function ForgotPasswordForm(){
                 {!send ? (
                     <div className="col-12 bg-white shadow-sm rounded-4 py-4 py-lg-5 px-4">
                         {error && (
-                            <div className="alert alert-danger mt-3">
-                                <i className="bi bi-exclamation-circle text-danger pe-2"></i>
+                            <div className="alert alert-danger mt-3" role="alert">
+                                <i className="bi bi-exclamation-circle text-danger pe-2" aria-hidden="true"></i>
                                 {error}
                             </div>
                         )}

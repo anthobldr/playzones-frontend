@@ -1,14 +1,9 @@
-label {
+.formLabel {
     color: var(--color-primary-dark);
 }
 
-button{
+.submitButton {
     background-color: var(--color-primary);
-}
-
-input:focus {
-    outline: none;
-    box-shadow: none;
 }
 
 .passwordSecurityTrack {

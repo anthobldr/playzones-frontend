@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 import style from "./ResetPassword.module.css";
 import { resetPassword } from "@/services/auth.service";
+import authStyle from "../css/Auth.module.css";
 
 export default function ResetPasswordForm(){
     const navigate = useNavigate();
@@ -34,8 +35,8 @@ export default function ResetPasswordForm(){
             <div className="row">
                 <div className="col-12 bg-white shadow-sm rounded-4 py-4 py-lg-5 px-4">
                     {error && (
-                        <div className="alert alert-danger mt-3">
-                            <i className="bi bi-exclamation-circle text-danger pe-2"></i>
+                        <div className="alert alert-danger mt-3" role="alert">
+                            <i className="bi bi-exclamation-circle text-danger pe-2" aria-hidden="true"></i>
                             {error}
                         </div>
                     )}
@@ -50,7 +51,7 @@ export default function ResetPasswordForm(){
                     </div>
                     <form className="d-flex flex-column gap-3 gap-lg-4" onSubmit={(e) => {e.preventDefault(); handleResetPassword();}}>
                         <div className="d-flex flex-column">
-                            <label className="fw-bold" htmlFor="input_password">Nouveau mot de passe</label>
+                            <label className={`fw-bold ${authStyle.formLabel}`} htmlFor="input_password">Nouveau mot de passe</label>
                             <div className="input-group pt-2">
                                 <span className="input-group-text bg-transparent border-end-0 border-2">
                                     <i className="bi bi-lock"></i>
@@ -59,7 +60,7 @@ export default function ResetPasswordForm(){
                             </div>
                         </div>
                         <div className="d-flex flex-column">
-                            <label className="fw-bold" htmlFor="input_confirmPassword">Confirme ton mot de passe</label>
+                            <label className={`fw-bold ${authStyle.formLabel}`} htmlFor="input_confirmPassword">Confirme ton mot de passe</label>
                             <div className="input-group pt-2">
                                 <span className="input-group-text bg-transparent border-end-0 border-2">
                                     <i className="bi bi-lock"></i>
@@ -68,7 +69,7 @@ export default function ResetPasswordForm(){
                             </div>
                         </div>
                         <div className="d-flex flex-column">
-                            <button type="submit" className="text-white my-4 py-2 rounded-4 border-0">
+                            <button type="submit" className={`text-white my-4 py-2 rounded-4 border-0 ${authStyle.submitButton}`}>
                                <i className="bi bi-lock-fill me-2"></i>Réinitialiser mon mot de passe
                             </button>
                         </div>

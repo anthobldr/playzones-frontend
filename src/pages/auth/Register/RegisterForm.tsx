@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { register } from "../../../services/auth.service";
 import checkPassword, { passwordsMatch } from "../../../utils/passwordValidator";
+import style from "../css/Auth.module.css";
 
 type FieldStatus = "" | "is-valid" | "is-invalid";
 const COLORS = ["#dc3545", "#dc3545", "#fd7e14", "#ffc107", "#198754"];
@@ -75,7 +76,7 @@ export default function RegisterForm() {
                     <h2 className="my-4 fw-bold">Inscription</h2>
                     <form className="d-flex flex-column gap-4" onSubmit={(e) => {e.preventDefault(); handleRegister();}}>
                         <div className="d-flex flex-column">
-                            <label className="fw-bold" htmlFor="input_email">Adresse e-mail</label>
+                            <label className={`fw-bold ${style.formLabel}`} htmlFor="input_email">Adresse e-mail</label>
                             <div className="input-group pt-2">
                                 <span className="input-group-text bg-transparent border-end-0 border-2">
                                     <i className="bi bi-envelope"></i>
@@ -84,7 +85,7 @@ export default function RegisterForm() {
                             </div>
                         </div>
                         <div className="d-flex flex-column">
-                            <label className="fw-bold" htmlFor="input_pseudo">Pseudo</label>
+                            <label className={`fw-bold ${style.formLabel}`} htmlFor="input_pseudo">Pseudo</label>
                             <div className="input-group pt-2">
                                 <span className="input-group-text bg-transparent border-end-0 border-2">
                                     <i className="bi bi-person"></i>
@@ -93,7 +94,7 @@ export default function RegisterForm() {
                             </div>
                         </div>
                         <div className="d-flex flex-column">
-                            <label className="fw-bold" htmlFor="input_password">Mot de passe</label>
+                            <label className={`fw-bold ${style.formLabel}`} htmlFor="input_password">Mot de passe</label>
                             <div className="input-group pt-2">
                                 <span className={`input-group-text bg-transparent border-end-0 border-2 ${passwordStatus === "is-valid" ? "border-success" : passwordStatus === "is-invalid" ? "border-danger" : ""}`}>
                                     <i className="bi bi-lock"></i>
@@ -103,7 +104,7 @@ export default function RegisterForm() {
                         </div>
                         <PasswordStrengthBar score={passwordScore} />
                         <div className="d-flex flex-column">
-                            <label className="fw-bold" htmlFor="input_confirm_password">Confirmer le mot de passe</label>
+                            <label className={`fw-bold ${style.formLabel}`} htmlFor="input_confirm_password">Confirmer le mot de passe</label>
                             <div className="input-group pt-2 mb-3">
                                 <span className={`input-group-text bg-transparent border-end-0 border-2 ${confirmStatus === "is-valid" ? "border-success" : confirmStatus === "is-invalid" ? "border-danger" : ""}`}>
                                     <i className="bi bi-lock"></i>
@@ -113,10 +114,10 @@ export default function RegisterForm() {
                         </div>
 
                         <div className="d-flex flex-column">
-                            <a className="text-decoration-none" href="#">Mot de passe oublié ?</a>
-                            <button type="submit" className="text-white my-4 py-2 rounded-4 border-0">
-                                Créer mon compte <i className="bi bi-person-circle ms-2"></i>
+                            <button type="submit" className={`text-white my-4 py-2 rounded-4 border-0 ${style.submitButton}`}>
+                                Créer mon compte <i className="bi bi-person-circle ms-2" aria-hidden="true"></i>
                             </button>
+                            <p className="mb-0 text-center">Déjà un compte ? <Link to="/auth/login">Se connecter</Link></p>
                         </div>
                     </form>
                 </div>

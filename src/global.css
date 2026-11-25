@@ -94,3 +94,8 @@ h2 {
   font-weight: 500;
   font-style: normal;
 }
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 0.2rem rgba(108, 77, 255, 0.25);
+}

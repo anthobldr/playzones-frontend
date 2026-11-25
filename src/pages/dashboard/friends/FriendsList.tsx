@@ -21,7 +21,7 @@ export default function FriendsList({ friends, onFriendRemoved }: FriendsListPro
     return (
         <div className="col-lg-5 bg-white d-flex flex-column gap-3 shadow-sm rounded-4 py-4">
             <div className="d-flex align-items-center justify-content-between px-2">
-                <h4>Ma liste d'amis</h4>
+                <h2>Ma liste d'amis</h2>
                 <small id={style.friendCount} className="rounded-4 px-2">{friends.length} amis</small>
             </div>
             {friends.length > 0 ? (

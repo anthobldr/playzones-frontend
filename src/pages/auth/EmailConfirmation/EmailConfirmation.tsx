@@ -86,8 +86,8 @@ export default function EmailConfirmation() {
             <main className="row justify-content-center align-items-center text-center my-5">
                 <section className="col-11 col-lg-6 bg-white rounded-4 shadow-sm py-4 py-lg-5">
                     {error && (
-                        <div className="alert alert-danger mt-3">
-                            <i className="bi bi-exclamation-circle text-danger pe-2"></i>
+                        <div className="alert alert-danger mt-3" role="alert">
+                            <i className="bi bi-exclamation-circle text-danger pe-2" aria-hidden="true"></i>
                             {error}
                         </div>
                     )}
