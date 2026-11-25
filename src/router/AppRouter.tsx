@@ -12,6 +12,9 @@ import Dashboard from "@/pages/dashboard/Dashboard";
 import Profil from "@/pages/dashboard/profil/Profil";
 import Messages from "@/pages/dashboard/messages/Messages";
 import Friends from "@/pages/dashboard/friends/Friends";
+import MentionsLegales from "@/pages/legal/MentionsLegales";
+import Confidentialite from "@/pages/legal/Confidentialite";
+import Cgu from "@/pages/legal/Cgu";
 
 export default function AppRouter() {
   return (
@@ -32,6 +35,9 @@ export default function AppRouter() {
           <Route path="messages" element={<Messages />} />
           <Route path="friends" element={<Friends />} />
         </Route>
+        <Route path="/mentions-legales" element={<MentionsLegales />} />
+        <Route path="/confidentialite" element={<Confidentialite />} />
+        <Route path="/cgu" element={<Cgu />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

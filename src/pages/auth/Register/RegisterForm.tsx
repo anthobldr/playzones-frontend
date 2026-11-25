@@ -15,6 +15,7 @@ export default function RegisterForm() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
+    const [acceptTerms, setAcceptTerms] = useState(false);
 
     const [passwordStatus, setPasswordStatus] = useState<FieldStatus>("");
     const [passwordScore, setPasswordScore] = useState(0);
@@ -55,8 +56,13 @@ export default function RegisterForm() {
             return;
         }
 
+        if (!acceptTerms) {
+            setError("Tu dois accepter les conditions d'utilisation et la politique de confidentialité.");
+            return;
+        }
+
         try{
-            await register(email, username, password, confirmPassword);
+            await register(email, username, password, confirmPassword, acceptTerms);
             navigate("/auth/confirmation", { state: { email } });
         } catch(error){
             setError(error instanceof Error ? error.message : "Une erreur est survenue. Veuillez réessayer.");
@@ -112,7 +118,13 @@ export default function RegisterForm() {
                                 <input id="input_confirm_password" type="password" autoComplete="new-password" value={confirmPassword} onChange={handleConfirmChange} className={`form-control border-start-0 border-2 ${confirmStatus}`} placeholder="*******" />
                             </div>
                         </div>
-
+                        <div className="form-check">
+                            <input id="input_accept_terms" className="form-check-input" type="checkbox" checked={acceptTerms} onChange={(e) => setAcceptTerms(e.target.checked)} required />
+                            <label className="form-check-label" htmlFor="input_accept_terms">
+                                J'accepte les <Link to="/cgu" target="_blank" rel="noopener noreferrer">conditions d'utilisation</Link> et
+                                j'ai pris connaissance de la <Link to="/confidentialite" target="_blank" rel="noopener noreferrer">politique de confidentialité</Link>.
+                            </label>
+                        </div>
                         <div className="d-flex flex-column">
                             <button type="submit" className={`text-white my-4 py-2 rounded-4 border-0 ${style.submitButton}`}>
                                 Créer mon compte <i className="bi bi-person-circle ms-2" aria-hidden="true"></i>

@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { navLinks } from "../../data/navLinks";
 
 const legalLinks = [
-    "Conditions d'utilisation",
-    "Politique de confidentialité",
-    "Mentions légales",
+    { label: "Conditions d'utilisation", to: "/cgu" },
+    { label: "Politique de confidentialité", to: "/confidentialite" },
+    { label: "Mentions légales", to: "/mentions-legales" },
 ];
 
 const socialLinks = [
@@ -40,9 +40,9 @@ export default function Footer() {
                 <div className="col-6 col-lg-3 mb-4 mb-lg-0">
                     <h5 className="text-white text-center">Légal</h5>
                     <ul className="list-unstyled d-flex flex-column gap-2 text-center">
-                        {legalLinks.map((label) => (
-                            <li key={label}>
-                                <a href="#" className="text-white text-decoration-none">{label}</a>
+                        {legalLinks.map((link) => (
+                            <li key={link.to}>
+                                <Link to={link.to} className="text-white text-decoration-none">{link.label}</Link>
                             </li>
                         ))}
                     </ul>

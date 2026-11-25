@@ -4,10 +4,10 @@ import type { User } from "@/types";
 interface UserResponse { message?: string; user: User; }
 interface MessageResponse { message: string; }
 
-export function register(email: string, username: string, password: string, confirmPassword: string) {
+export function register(email: string, username: string, password: string, confirmPassword: string,  acceptTerms: boolean) {
     return apiFetch<UserResponse>("/auth/register", {
         method: "POST",
-        body: JSON.stringify({ email, username, password, confirmPassword }),
+        body: JSON.stringify({ email, username, password, confirmPassword, acceptTerms }),
     });
 }
 
