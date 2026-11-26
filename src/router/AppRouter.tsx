@@ -40,6 +40,7 @@ export default function AppRouter() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="profil" element={<Profil />} />
           <Route path="messages" element={<Messages />} />
+          <Route path="messages/:conversationId" element={<Messages />} />
           <Route path="friends" element={<Friends />} />
           <Route path="games" element={<MyGames />} />
           <Route path="games/tic-tac-toe/:id" element={<TicTacToe />} />

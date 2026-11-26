@@ -4,6 +4,7 @@ import type { Player } from "../../../types";
 import { getAvatarUrl } from "../../../services/avatar.service";
 import * as friendshipService from "../../../services/friendship.service";
 import * as gameService from "@/services/game.service";
+import * as messageService from "@/services/message.service";
 import style from "./css/Friends.module.css"
 
 interface FriendsListProps {
@@ -28,6 +29,16 @@ export default function FriendsList({ friends, onFriendRemoved }: FriendsListPro
         }
     }
     
+    const handleMessage = async (friendId: number) => {
+        setChallengeError("");
+        try {
+            const conversation = await messageService.openConversation(friendId);
+            navigate(`/account/messages/${conversation.id}`);
+        } catch (error) {
+            setChallengeError(error instanceof Error ? error.message : "Impossible d'ouvrir la conversation.");
+        }
+    }
+
     const handleRemoveFriend = async (friendId: number) => {
         try {
             await friendshipService.removeFriend(friendId);
@@ -66,8 +77,8 @@ export default function FriendsList({ friends, onFriendRemoved }: FriendsListPro
                                     </button>
                                     <ul className="dropdown-menu dropdown-menu-end shadow border-0 rounded-4 p-2 mt-2">
                                         <li>
-                                            <button className="dropdown-item btn">
-                                                <i className="bi bi-chat-dots me-2"></i>
+                                           <button type="button" className="dropdown-item btn" onClick={() => handleMessage(friend.id)}>
+                                                <i className="bi bi-chat-dots me-2" aria-hidden="true"></i>
                                                 Envoyer un message
                                             </button>
                                         </li>
