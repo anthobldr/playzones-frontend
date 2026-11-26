@@ -1,6 +1,9 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import type { Player } from "../../../types";
 import { getAvatarUrl } from "../../../services/avatar.service";
 import * as friendshipService from "../../../services/friendship.service";
+import * as gameService from "@/services/game.service";
 import style from "./css/Friends.module.css"
 
 interface FriendsListProps {
@@ -9,6 +12,22 @@ interface FriendsListProps {
 }
 
 export default function FriendsList({ friends, onFriendRemoved }: FriendsListProps){
+    const navigate = useNavigate();
+    const [challengingId, setChallengingId] = useState<number | null>(null);
+    const [challengeError, setChallengeError] = useState("");
+
+    const handleChallenge = async (friendId: number) => {
+        setChallengeError("");
+        setChallengingId(friendId);
+        try {
+            const game = await gameService.challengeFriend(friendId);
+            navigate(`/account/games/tic-tac-toe/${game.id}`);
+        } catch (error) {
+            setChallengeError(error instanceof Error ? error.message : "Impossible de lancer le défi.");
+            setChallengingId(null);
+        }
+    }
+    
     const handleRemoveFriend = async (friendId: number) => {
         try {
             await friendshipService.removeFriend(friendId);
@@ -24,6 +43,7 @@ export default function FriendsList({ friends, onFriendRemoved }: FriendsListPro
                 <h2>Ma liste d'amis</h2>
                 <small id={style.friendCount} className="rounded-4 px-2">{friends.length} amis</small>
             </div>
+            {challengeError && <p role="alert" className="text-danger px-2 mb-0">{challengeError}</p>}
             {friends.length > 0 ? (
                 <ul className="list-unstyled d-flex flex-column gap-3">
                     {friends.map((friend) => (
@@ -36,8 +56,9 @@ export default function FriendsList({ friends, onFriendRemoved }: FriendsListPro
                                 <small className="text-success">En ligne</small>
                             </div>
                             <div className="d-flex gap-2 ms-auto">
-                                <button id={style.battle} className="btn border rounded-4">
-                                    <i className="bi bi-controller me-2"></i>Défier
+                                <button type="button" className={`btn border rounded-4 ${style.battle}`} onClick={() => handleChallenge(friend.id)} disabled={challengingId !== null}>
+                                    <i className="bi bi-controller me-2" aria-hidden="true"></i>
+                                    Défier<span className="visually-hidden"> {friend.username}</span>
                                 </button>
                                 <div className="dropdown">
                                     <button className="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

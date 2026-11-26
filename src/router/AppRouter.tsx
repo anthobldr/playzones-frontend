@@ -15,6 +15,7 @@ import Friends from "@/pages/dashboard/friends/Friends";
 import MentionsLegales from "@/pages/legal/MentionsLegales";
 import Confidentialite from "@/pages/legal/Confidentialite";
 import Cgu from "@/pages/legal/Cgu";
+import TicTacToe from "@/pages/dashboard/games/TicTacToe";
 
 export default function AppRouter() {
   return (
@@ -34,6 +35,7 @@ export default function AppRouter() {
           <Route path="profil" element={<Profil />} />
           <Route path="messages" element={<Messages />} />
           <Route path="friends" element={<Friends />} />
+          <Route path="games/tic-tac-toe/:id" element={<TicTacToe />} />
         </Route>
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/confidentialite" element={<Confidentialite />} />

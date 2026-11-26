@@ -1,0 +1,33 @@
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    width: min(100%, 360px);
+    aspect-ratio: 1;
+}
+
+.cell {
+    border: none;
+    border-radius: 16px;
+    background-color: var(--color-purple-bg);
+    font-size: clamp(2rem, 10vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.cell:not(:disabled):hover {
+    background-color: #E2D6FF;
+}
+
+.cell:disabled {
+    cursor: default;
+}
+
+
+.x {
+    color: var(--color-primary);
+}
+
+.o {
+    color: #C2410C;
+}

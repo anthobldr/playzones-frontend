@@ -23,6 +23,6 @@
     background-color: #F1EBFF;
 }
 
-#battle{
+.battle{
     color: var(--color-primary) !important;
 }
