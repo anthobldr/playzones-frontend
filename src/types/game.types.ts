@@ -1,6 +1,6 @@
 import type { Avatar } from "./avatar.types";
 
-export type GameStatus = "in_progress" | "won" | "draw";
+export type GameStatus = "pending" | "in_progress" | "won" | "draw";
 export type TicTacToeSymbol = "X" | "O";
 
 export interface TicTacToeGame {

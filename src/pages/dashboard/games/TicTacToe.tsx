@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import AsideBar from "@/components/layout/AsideBar";
 import TopBar from "../components/TopBar";
+import { useRealtimeEvent } from "@/hooks/useRealtimeEvent";
 import { getAvatarUrl } from "@/services/avatar.service";
 import * as gameService from "@/services/game.service";
 import type { TicTacToeGame } from "@/types";
@@ -10,19 +11,27 @@ import style from "./css/TicTacToe.module.css";
 const EMPTY_CELL = "-";
 
 function getStatusMessage(game: TicTacToeGame): string {
-    if (game.status === "draw") return "Match nul !";
-    if (game.status === "won") {
-        return game.winnerId === game.opponent.id ? `${game.opponent.username} a gagné.` : "Tu as gagné ! 🎉";
+    switch (game.status) {
+        case "pending":
+            return game.yourSymbol === "X"
+                ? `En attente de la réponse de ${game.opponent.username}…`
+                : `${game.opponent.username} te défie !`;
+        case "draw":
+            return "Match nul !";
+        case "won":
+            return game.winnerId === game.opponent.id ? `${game.opponent.username} a gagné.` : "Tu as gagné ! 🎉";
+        default:
+            return game.isYourTurn ? `À toi de jouer (${game.yourSymbol}).` : `Tour de ${game.opponent.username}…`;
     }
-    return game.isYourTurn ? `À toi de jouer (${game.yourSymbol}).` : `Tour de ${game.opponent.username}…`;
 }
 
 export default function TicTacToe() {
     const { id } = useParams();
     const gameId = Number(id);
+    const navigate = useNavigate();
     const [game, setGame] = useState<TicTacToeGame | null>(null);
     const [error, setError] = useState("");
-    const [playing, setPlaying] = useState(false);
+    const [busy, setBusy] = useState(false);
 
     useEffect(() => {
         let ignore = false;
@@ -40,18 +49,67 @@ export default function TicTacToe() {
         return () => { ignore = true; };
     }, [gameId]);
 
-    async function handlePlay(cell: number) {
-        if (!game) return;
+    // Le coup de l'adversaire arrive en direct
+    useRealtimeEvent((event) => {
+        switch (event.type) {
+            case "game.started":
+            case "game.updated":
+                if (event.game.id === gameId) {
+                    setGame(event.game);
+                    setError("");
+                }
+                break;
+            case "game.invitation_removed":
+                if (event.gameId === gameId) {
+                    setGame(null);
+                    setError("Ce défi a été annulé ou refusé.");
+                }
+                break;
+            case "realtime.reconnected":
+                // Un coup a pu être joué pendant la coupure : on relit l'état officiel
+                gameService.getGame(gameId).then(setGame).catch(() => {});
+                break;
+        }
+    });
 
+    // Exécute une action sur la partie, affiche la grille renvoyée par l'API ou l'erreur
+    async function runAction(action: () => Promise<TicTacToeGame>) {
         setError("");
-        setPlaying(true);
+        setBusy(true);
         try {
-            // On affiche la grille renvoyée par l'API : c'est elle qui fait foi
-            setGame(await gameService.playMove(game.id, cell));
+            setGame(await action());
         } catch (err) {
-            setError(err instanceof Error ? err.message : "Coup refusé.");
+            setError(err instanceof Error ? err.message : "Action refusée.");
         } finally {
-            setPlaying(false);
+            setBusy(false);
+        }
+    }
+
+    async function handleRemoveInvitation() {
+        setBusy(true);
+        try {
+            await gameService.removeInvitation(gameId);
+        } catch {
+            // L'invitation n'existe déjà plus
+        }
+        navigate("/account/games");
+    }
+
+    async function handleRematch(opponentId: number) {
+        setBusy(true);
+        try {
+            const newGame = await gameService.challengeFriend(opponentId);
+            navigate(`/account/games/tic-tac-toe/${newGame.id}`);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : "Impossible de relancer un défi.");
+        } finally {
+            setBusy(false);
+        }
+    }
+
+    function handleForfeit() {
+        if (window.confirm("Abandonner la partie ? Ton adversaire gagnera.")) {
+            runAction(() => gameService.forfeitGame(gameId));
         }
     }
 
@@ -77,7 +135,7 @@ export default function TicTacToe() {
 
                     {!game && !error && <p>Chargement de la partie…</p>}
 
-                    {!game && error && <Link to="/account/friends">Retour à mes amis</Link>}
+                    {!game && error && <Link to="/account/games">Retour à mes parties</Link>}
 
                     {game && (
                         <section className="bg-white shadow-sm rounded-4 p-4 d-flex flex-column align-items-center gap-3" aria-labelledby="game-status">
@@ -91,14 +149,45 @@ export default function TicTacToe() {
                                             key={index}
                                             type="button"
                                             className={`${style.cell} ${cell === "X" ? style.x : ""} ${cell === "O" ? style.o : ""}`}
-                                            onClick={() => handlePlay(index)}
-                                            disabled={!isEmpty || !game.isYourTurn || playing}
+                                            onClick={() => runAction(() => gameService.playMove(game.id, index))}
+                                            disabled={!isEmpty || !game.isYourTurn || busy}
                                             aria-label={`Case ${index + 1}, ${isEmpty ? "vide" : cell}`}
                                         >
                                             {isEmpty ? "" : cell}
                                         </button>
                                     );
                                 })}
+                            </div>
+
+                            <div className="d-flex gap-2 flex-wrap justify-content-center">
+                                {game.status === "pending" && game.yourSymbol === "O" && (
+                                    <>
+                                        <button type="button" className="btn btn-primary rounded-4" disabled={busy} onClick={() => runAction(() => gameService.acceptInvitation(game.id))}>
+                                            Accepter le défi
+                                        </button>
+                                        <button type="button" className="btn btn-outline-secondary rounded-4" disabled={busy} onClick={handleRemoveInvitation}>
+                                            Refuser
+                                        </button>
+                                    </>
+                                )}
+                                {game.status === "pending" && game.yourSymbol === "X" && (
+                                    <button type="button" className="btn btn-outline-secondary rounded-4" disabled={busy} onClick={handleRemoveInvitation}>
+                                        Annuler le défi
+                                    </button>
+                                )}
+                                {game.status === "in_progress" && (
+                                    <button type="button" className="btn btn-outline-danger rounded-4" disabled={busy} onClick={handleForfeit}>
+                                        Abandonner
+                                    </button>
+                                )}
+                                {(game.status === "won" || game.status === "draw") && (
+                                    <>
+                                        <button type="button" className="btn btn-primary rounded-4" disabled={busy} onClick={() => handleRematch(game.opponent.id)}>
+                                            Revanche
+                                        </button>
+                                        <Link to="/account/games" className="btn btn-outline-secondary rounded-4">Mes parties</Link>
+                                    </>
+                                )}
                             </div>
                         </section>
                     )}

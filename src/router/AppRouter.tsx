@@ -16,10 +16,16 @@ import MentionsLegales from "@/pages/legal/MentionsLegales";
 import Confidentialite from "@/pages/legal/Confidentialite";
 import Cgu from "@/pages/legal/Cgu";
 import TicTacToe from "@/pages/dashboard/games/TicTacToe";
+import MyGames from "@/pages/dashboard/games/MyGames";
+import GameInvitations from "@/components/realtime/GameInvitations";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function AppRouter() {
+  const { user } = useAuth();
+
   return (
     <BrowserRouter>
+      {user && <GameInvitations />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth">
@@ -35,6 +41,7 @@ export default function AppRouter() {
           <Route path="profil" element={<Profil />} />
           <Route path="messages" element={<Messages />} />
           <Route path="friends" element={<Friends />} />
+          <Route path="games" element={<MyGames />} />
           <Route path="games/tic-tac-toe/:id" element={<TicTacToe />} />
         </Route>
         <Route path="/mentions-legales" element={<MentionsLegales />} />
