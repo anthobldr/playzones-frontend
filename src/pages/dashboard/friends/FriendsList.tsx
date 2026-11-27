@@ -64,7 +64,6 @@ export default function FriendsList({ friends, onFriendRemoved }: FriendsListPro
                             </div>
                             <div className="d-flex flex-column lh-sm">
                                 <span>{friend.username}</span>
-                                <small className="text-success">En ligne</small>
                             </div>
                             <div className="d-flex gap-2 ms-auto">
                                 <button type="button" className={`btn border rounded-4 ${style.battle}`} onClick={() => handleChallenge(friend.id)} disabled={challengingId !== null}>

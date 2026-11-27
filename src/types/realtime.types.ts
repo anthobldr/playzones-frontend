@@ -7,6 +7,7 @@ export type RealtimeEvent =
     | { type: "game.updated"; game: TicTacToeGame }
     | { type: "game.invitation_removed"; gameId: number; by: string }
     | { type: "message.created"; conversationId: number; message: ChatMessage }
+    | { type: "conversation.read"; conversationId: number }
     | { type: "realtime.reconnected" };
 
 export interface RealtimeSubscription {

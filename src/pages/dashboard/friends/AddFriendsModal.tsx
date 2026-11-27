@@ -93,11 +93,6 @@ export default function AddFriendsModal({ onFriendAdded, friends }: AddFriendsMo
                                                 </div>
                                                 <div className="d-flex flex-column lh-sm">
                                                     <span>{player.username}</span>
-                                                    {player.online ? (
-                                                        <small className="text-success">En ligne</small>
-                                                    ) : (
-                                                        <small className="text-secondary">Hors ligne</small>
-                                                    )}
                                                 </div>
                                                 <div className="ms-auto">
                                                     {sentRequests.has(player.id) ? (

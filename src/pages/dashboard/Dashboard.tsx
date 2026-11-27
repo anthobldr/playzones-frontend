@@ -1,25 +1,54 @@
+import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import { useRealtimeEvent } from "@/hooks/useRealtimeEvent";
+import * as gameService from "@/services/game.service";
+import type { GameStats, TicTacToeGame } from "@/types";
 import AsideBar from "../../components/layout/AsideBar";
 import TopBar from "./components/TopBar";
 import HistoryGames from "./components/HistoryGames";
-import CardChallanges from "./components/CardChallenge";
-import Activity from "./components/Activity";
-import TrophyClassement from "./components/TrophyClassement";
+import CurrentGames from "./components/CurrentGames";
 import Footer from "../../components/layout/Footer";
 import style from "./css/ProfilStatCard.module.css"
 
 export default function Dashboard(){
     const { user } = useAuth();
-    const stats = [
-        {icon: "bi bi-dice-6-fill", colorClass: "gamesIcon", label: "Parties jouées", value: "2"},
-        {icon: "bi bi-trophy-fill", colorClass: "trophyIcon", label: "Victoires", value: "1"},
-        {icon: "bi bi-star-fill", colorClass: "scoreIcon", label: "Score actuel", value: "3"},
-        {icon: "bi bi-patch-check-fill", colorClass: "badgeIcon", label: "Badge récent", value: "Noob"},
-    ]
-    const challenges = [
-        {icon: "bi bi-trophy-fill", name: "Gagner 3 parties", desc: "2/3 parties gagnées.", value: "50", progress: 66, color: "#FFC72C"},
-        {icon: "bi bi-patch-check-fill", name: "Jouer 2 parties de Puissance 4", desc: "1/2 parties jouées.", value: "30", progress: 50, color: "#4DA8DA"},
-    ]
+    const [stats, setStats] = useState<GameStats | null>(null);
+    const [games, setGames] = useState<TicTacToeGame[]>([]);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        let ignore = false;
+
+        async function loadDashboard() {
+            try {
+                const [statsData, gamesData] = await Promise.all([gameService.getMyStats(), gameService.getMyGames()]);
+                if (ignore) return;
+                setStats(statsData);
+                setGames(gamesData);
+            } catch (err) {
+                if (!ignore) setError(err instanceof Error ? err.message : "Impossible de charger ton tableau de bord.");
+            }
+        }
+
+        loadDashboard();
+        return () => { ignore = true; };
+    }, []);
+
+    useRealtimeEvent((event) => {
+        if (event.type.startsWith("game.") || event.type === "realtime.reconnected") {
+            gameService.getMyStats().then(setStats).catch(() => {});
+            gameService.getMyGames().then(setGames).catch(() => {});
+        }
+    });
+
+    const statCards = [
+        {icon: "bi bi-dice-6-fill", colorClass: "gamesIcon", label: "Parties jouées", value: stats?.played},
+        {icon: "bi bi-trophy-fill", colorClass: "trophyIcon", label: "Victoires", value: stats?.won},
+        {icon: "bi bi-dash-circle-fill", colorClass: "scoreIcon", label: "Matchs nuls", value: stats?.draws},
+        {icon: "bi bi-x-circle-fill", colorClass: "badgeIcon", label: "Défaites", value: stats?.lost},
+    ];
+    const finishedGames = games.filter((game) => game.status === "won" || game.status === "draw").slice(0, 3);
+    const currentGames = games.filter((game) => game.status === "pending" || game.status === "in_progress");
 
     return (
         <div className="container-fluid p-0">
@@ -34,37 +63,18 @@ export default function Dashboard(){
                             <h1>Bonjour, {user?.username} ! 👋</h1>
                             <span>Prêt pour une nouvelle partie ?</span>
                         </div>
-                        <div className="col-12 col-lg-4">
-                        </div>
+                        {error && <p role="alert" className="text-danger mt-3">{error}</p>}
                         <div className="d-flex gap-2 flex-wrap mt-3">
-                            {stats.map((stat,index) => (
-                                <ProfilStatCard key={index} icon={stat.icon} colorClass={style[stat.colorClass]} label={stat.label} value={stat.value} />
+                            {statCards.map((stat) => (
+                                <ProfilStatCard key={stat.label} icon={stat.icon} colorClass={style[stat.colorClass]} label={stat.label} value={stats ? String(stat.value) : "…"} />
                             ))}
                         </div>
                         <div className="row my-4">
                             <div className="col-12 col-lg-7">
-                                <HistoryGames />
+                                <HistoryGames games={finishedGames} />
                             </div>
                             <div className="col-12 col-lg-5">
-                                <div className="bg-white shadow-sm rounded-4 py-4 px-4 mt-4 m-lg-0 h-100">
-                                    <div className="d-flex justify-content-between px-2">
-                                        <h2>Défis du jour</h2>
-                                        <a href="#" className="text-decoration-none">Voir tout</a>
-                                    </div>
-                                    <div className="d-flex flex-column gap-lg-4 my-2">
-                                        {challenges.map((challenge,index) =>(
-                                            <CardChallanges key={index} icon={challenge.icon} name={challenge.name} desc={challenge.desc} value={challenge.value} progress={challenge.progress} color={challenge.color}/>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-12 col-lg-7 mt-4 m-lg-0">
-                                <Activity />
-                            </div>
-                            <div className="col-12 col-lg-5 mt-4 m-lg-0">
-                                <TrophyClassement />
+                                <CurrentGames games={currentGames} />
                             </div>
                         </div>
                     </div>

@@ -1,10 +1,13 @@
 import { apiFetch } from "./api";
-import type { TicTacToeGame } from "@/types";
+import type { GameStats, TicTacToeGame } from "@/types";
 
 const TIC_TAC_TOE = "/games/tic-tac-toe";
 
 export const getMyGames = () =>
     apiFetch<TicTacToeGame[]>(TIC_TAC_TOE);
+
+export const getMyStats = () =>
+    apiFetch<GameStats>(`${TIC_TAC_TOE}/stats`);
 
 export const getGame = (gameId: number) =>
     apiFetch<TicTacToeGame>(`${TIC_TAC_TOE}/${gameId}`);

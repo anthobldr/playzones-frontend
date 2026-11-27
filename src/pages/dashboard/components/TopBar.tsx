@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
+import { useUnreadMessages } from "@/hooks/useUnreadMessages";
 import { getAvatarUrl } from "../../../services/avatar.service";
 import { items } from "../../../data/dashboardNavLinks";
 import "../css/Profil.css";
@@ -8,9 +9,25 @@ const profilMenu = [
     { label: "Mon profil", icon: "bi-person", to: "/account/profil" },
 ];
 
+function MessagesLink({ unread }: { unread: number }) {
+    const label = unread > 0 ? `Messages, ${unread} non lu${unread > 1 ? "s" : ""}` : "Messages";
+
+    return (
+        <Link to="/account/messages" className="notification-btn btn bg-white border rounded-circle d-flex align-items-center justify-content-center position-relative" aria-label={label}>
+            <i className="bi bi-chat-dots fs-5" aria-hidden="true"></i>
+            {unread > 0 && (
+                <span className="badge-notification position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" aria-hidden="true">
+                    {unread > 99 ? "99+" : unread}
+                </span>
+            )}
+        </Link>
+    );
+}
+
 export default function TopBar() {
     const { pathname } = useLocation();
     const { user } = useAuth();
+    const unread = useUnreadMessages();
 
     return (
         <section className="py-3 px-2">
@@ -37,22 +54,12 @@ export default function TopBar() {
                     <img src="/logo.png" alt="Logo PlayZone" width="150" />
                 </div>
                 <div className="d-flex gap-3">
-                    <button className="notification-btn btn bg-white border rounded-circle d-flex align-items-center justify-content-center position-relative" aria-label="Notifications">
-                        <i className="bi bi-bell fs-5"></i>
-                        <span className="badge-notification position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
-                    </button>
+                    <MessagesLink unread={unread} />
                     <img src={getAvatarUrl(user?.avatar)} alt={`Avatar de ${user?.username ?? "Invité"}`} className="rounded-circle" width="44" height="44"/>
                 </div>
             </div>
             <div className="d-none topbar d-lg-flex justify-content-lg-end align-items-center gap-lg-4 my-lg-2 me-lg-5">
-                <div className="position-relative">
-                    <i className="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary"></i>
-                    <input type="search" className="form-control ps-5 rounded-pill" placeholder="Rechercher un jeu, un joueur..." style={{ width: "300px" }}/>
-                </div>
-                <button className="notification-btn btn bg-white border rounded-circle d-flex align-items-center justify-content-center position-relative" aria-label="Notifications">
-                    <i className="bi bi-bell fs-5"></i>
-                    <span className="badge-notification position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
-                </button>
+                <MessagesLink unread={unread} />
                 <div className="dropdown">
                     <button className="profile-btn btn rounded-pill d-flex align-items-center border-0 p-2 pe-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src={getAvatarUrl(user?.avatar)} alt={`Avatar de ${user?.username ?? "Invité"}`} className="rounded-circle" width="48" height="48"/>

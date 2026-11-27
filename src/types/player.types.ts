@@ -4,5 +4,4 @@ export interface Player {
     id: number;
     username: string;
     avatar: Avatar | null;
-    online?: boolean;
 }
