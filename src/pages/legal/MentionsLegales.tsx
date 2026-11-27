@@ -3,7 +3,7 @@ import LegalLayout from "./LegalLayout";
 
 export default function MentionsLegales() {
     return (
-        <LegalLayout title="Mentions légales" updatedAt="[JJ/MM/AAAA]">
+        <LegalLayout title="Mentions légales" updatedAt="25/11/2016">
             <h2 className="h4 mt-4">Éditeur du site</h2>
             <p>
                 PlayZones est un projet réalisé dans le cadre de la formation Développeur web et web mobile.<br />

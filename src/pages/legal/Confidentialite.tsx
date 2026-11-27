@@ -14,7 +14,7 @@ const treatments = [
 
 export default function Confidentialite() {
     return (
-        <LegalLayout title="Politique de confidentialité" updatedAt="[JJ/MM/AAAA]">
+        <LegalLayout title="Politique de confidentialité" updatedAt="25/11/2016">
             <p>
                 Cette page explique quelles données PlayZones collecte, pourquoi, combien de temps elles sont conservées
                 et comment exercer tes droits, conformément au Règlement général sur la protection des données (RGPD).
@@ -56,7 +56,7 @@ export default function Confidentialite() {
                 <li>
                     <strong>Resend</strong>, prestataire d'envoi d'e-mails : reçoit ton adresse e-mail et ton pseudo
                     pour t'envoyer les codes de vérification et les liens de réinitialisation.
-                    [À compléter : localisation des serveurs et garanties en cas de transfert hors de l'Union européenne]
+                    Les données sont hébergées sur un serveur situé dans l'Union européenne. Aucune donnée n'est transférée hors de l'Union européenne.
                 </li>
                 <li>
                     <strong>DiceBear</strong>, service de génération d'avatars : ton navigateur lui envoie ton adresse IP

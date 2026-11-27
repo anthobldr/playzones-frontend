@@ -3,7 +3,7 @@ import LegalLayout from "./LegalLayout";
 
 export default function Cgu() {
     return (
-        <LegalLayout title="Conditions d'utilisation" updatedAt="[JJ/MM/AAAA]">
+        <LegalLayout title="Conditions d'utilisation" updatedAt="25/11/2016">
             <h2 className="h4 mt-4">1. Objet</h2>
             <p>
                 Les présentes conditions encadrent l'utilisation de PlayZones, une plateforme gratuite de jeux de société en ligne.
